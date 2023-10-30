@@ -49,9 +49,6 @@ const Subject = () => {
                   <span className="ml-2">{subject.progress}%</span>
                 </div>
               </div>
-
-
-
             </div>
           </Link>
         ))}
