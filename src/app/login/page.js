@@ -75,7 +75,7 @@ function Login(){
                             Sign In
                           </button>
                         ) : (
-                          <button disabled className="rounded border border-gray-700 bg-gray-500 p-1 m-auto w-1/3" onClick={handleLogin}>
+                          <button disabled className="rounded border border-gray-700 bg-gray-500 p-1 m-auto w-1/3" >
                             <div className="max-h-10">
                               <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
                             </div>
