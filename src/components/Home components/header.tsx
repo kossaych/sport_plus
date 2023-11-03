@@ -6,7 +6,11 @@ import {VscAccount} from 'react-icons/vsc'
 import Link from 'next/link';
 
 const Header = () => {
- 
+  function logout(){
+    localStorage.removeItem('token');
+    window.location.reload();
+    window.location.href='/'
+}
     return (
       <div className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -29,7 +33,7 @@ const Header = () => {
           <VscAccount size = {25}/> Profile
           </Link>
       
-            <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900">
+            <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900" onClick={logout}>
                <CiLogout size={25} /> logout
           </Link> 
           
