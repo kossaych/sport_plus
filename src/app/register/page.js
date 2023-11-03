@@ -79,7 +79,7 @@ function Register() {
       },
       body: JSON.stringify({
         email: email,
-        code: code,
+        code:code,
       }),
     })
       .then((response) => {
@@ -93,15 +93,16 @@ function Register() {
         }
       })
       .then((data) => {
+        
+
         if (
-          data === "code not sent for your email" ||
-          data === "user not registered" ||
-          data === "invalid code time" ||
-          data === "False code" ||
+          data === 'code time out try to register again'||
+          data === 'invalid code'||
+          data === 'code not sended for your email try to register again'||
+          data === "user not registed" ||
           data === "server error 500"
         ) {
-          setMessage(data);
-          setPopUpOpen(true)
+          
         } else {
           localStorage.setItem("token", JSON.stringify(data));
           window.location.href = "/";
@@ -171,7 +172,7 @@ function Register() {
                           <h2 className="text-red-500 w-72">{message}</h2>       
                     </PopUp>
 
-                  <input  className="  mb-2 border border-blue-800 rounded p-1" placeholder="code de verifacation" onChange={(e) => setCity(e.target.value)} /> <br></br>
+                  <input  className="  mb-2 border border-blue-800 rounded p-1" placeholder="code de verifacation" onChange={(e) => setCode(e.target.value)} /> <br></br>
 
 
 
