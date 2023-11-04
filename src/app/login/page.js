@@ -2,6 +2,7 @@
 import React from "react";
 import Link from 'next/link';
 import { useState } from "react";
+import PopUp from '/src/components/general/pop-up.js'
 
 function Login(){
     const [email, setEmail] = useState("");
@@ -9,7 +10,16 @@ function Login(){
     const [isWait, setIsWait] = useState(false);
     const [message, setMessage] = useState("");
 
+    
+    const [isPopUpOpen, setPopUpOpen] = useState(false);
 
+    const openPopUp = () => {
+      setPopUpOpen(true);
+    }
+  
+    const closePopUp = () => {
+      setPopUpOpen(false);
+    }
     const handleLogin = () => {
       setIsWait(true)
       setMessage('')
@@ -38,22 +48,20 @@ function Login(){
       .then(data =>{
           if (data === 'server error 500' || data ==='account not active' || data ==='false data' || data ==='email not regested'){
             setMessage(data)
+            setPopUpOpen(true)
           }else {
             localStorage.setItem('token',JSON.stringify(data))
             window.location.href='/'
           }
       })}
-      
-    let token = localStorage.getItem('token')
 
-    if (token){
-      window.location.href="/"
-    }else{
-          return(
+    return(
           <div className="text-center rounded bg-white  border border-blue-900 m-3 p-4">
-                      <h1 className="mb-4 text-blue-500 text-2xl font-bold">Sign In</h1>
+                      <h1 className=" text-blue-500 text-2xl font-bold">Sign In</h1>
                     
-                      <div className="text-red-900 h-7">{message}</div>
+                      <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
+                       <h2 className="text-red-500 w-72">{message}</h2>       
+                      </PopUp>
                   
                       <div className="m-3">
                       
@@ -92,7 +100,7 @@ function Login(){
                       </div>
           </div>
     )}
-}
+
   
 
 export default Login

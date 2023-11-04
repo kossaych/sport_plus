@@ -9,7 +9,7 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [isWait, setIsWait] = useState(false);
-  const [message, setMessageCode] = useState("");
+  const [message, setMessage] = useState("");
   const [emailPage, setEmailPage] = useState(true);
   const [codePage, setCodePage] = useState(false);
   const [passwordPage, setPasswordPage] = useState(false);
@@ -37,16 +37,20 @@ function ResetPassword() {
       }),
     })
       .then((response) => {
-        setIsWait(true);
-        return response.json()
+        setIsWait(false);
+        if (response.status == 500) {
+            return 'server error'
+          } else {
+            return response.json()
+          }
       })
       .then((data) => {
-        if (data === 'check your email') {
-           setEmailPage(false);
-           setIsWait(false);
-           setCodePage(true);
+        if (data === 'check your email'){
+          setEmailPage(false);
+          setIsWait(false);
+          setCodePage(true);
         }else{
-            setMessage(response.json())
+            setMessage(data)
             setPopUpOpen(true)
         }
       });
@@ -64,7 +68,7 @@ function ResetPassword() {
         code: code,
       }),
     })
-      .then((response) => {
+    .then((response) => {
         setIsWait(false);
         if (response.status === 200) {
           return true;
@@ -72,12 +76,11 @@ function ResetPassword() {
           return response.json();
         }
       })
-      .then((data) => {
+    .then((data) => {
         if (data === true) {
             setEmailPage(false)
             setCodePage(false)
             setPasswordPage(true)
-          setIsWait(true);
         } else {
           setPopUpOpen(true)
           setMessage(data);
@@ -109,24 +112,16 @@ function ResetPassword() {
         }
       })
       .then((data) => {
-        if (
-          data === "invalid new password" ||
-          data === "invalid code time" ||
-          data === "False code" ||
-          data === "code not sent to your email" ||
-          data === "user not found" ||
-          data === "server error 500"
-        ) {
-          // Handle error messages here
+        if ( data === "invalid new password" ||  data === "invalid code time" ||  data === "False code" || data === "code not sent to your email" || data === "user not found" || data === "server error 500") {
+          setMessage(data)
+          setPopUpOpen(true)
         } else {
           localStorage.setItem("token", JSON.stringify(data));
-          setIsWait(true);
           window.location.href = "/";
         }
       });
   };
 
-  
   return (
       <div className="text-center rounded bg-white  border border-blue-900 m-3 p-2">
             <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
