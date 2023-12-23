@@ -2,7 +2,10 @@ import Link from "next/link";
 import { title } from "process";
 import React from 'react';
 
-const Subject = (props) => {
+const Subject = (props) => { 
+  if(!(localStorage.getItem('token'))){
+    window.location.href = "/";
+  }
   const subject  = props.params.id
   return (
     <>

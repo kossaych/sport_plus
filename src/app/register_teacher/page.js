@@ -7,31 +7,38 @@ import PopUp from '/src/components/general/pop-up.js'
 
 
 function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [email, setEmail] = useState("");
-  const [password2, setPassword2] = useState("");
-  const [code, setCode] = useState("");
-  const [phone, setPhone] = useState("");
-  const [city, setCity] = useState("");
-  const [discipline, setDiscipline] = useState("");
+  const inputStyle = "m-1 border focus:outline-none border-blue-200 rounded bg-blue-100 p-1"
+  const btnDiv  = "text-center grid grid-cols-1 place-items-center"
+  const activeBtn = "border rounded-md h-10 bg-blue-600 p-1 text-white w-1/2"
+  const inactiveBtn = "rounded-md border h-10 bg-gray-600 p-1 text-white "
+  const [user, setUser] = useState({ 
+    "firstName" : "",
+    "lastName" : "",
+    "password1" : "",
+    "email" : "",
+    "password2" : "", 
+    "code" : "",
+    "phone" : "",
+    "address" : "",
+    "sex" : "",
+    "discipline": "" 
+  });
+
   const [disciplines, setDisciplines] = useState([]);
+  const [addreses, setAddreses] = useState([]); 
 
-
+  const [isWait, setIsWait] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isRegistered, setIsRegistered] = useState(false);
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
   const openPopUp = () => {
     setPopUpOpen(true);
   }
-
   const closePopUp = () => {
     setPopUpOpen(false);
   }
  
-  const [isWait, setIsWait] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isRegistered, setIsRegistered] = useState(false);
   
   useEffect(()=>{
     fetch("http://192.168.1.111:8000/users/api/get_disciplines/", {
@@ -42,8 +49,7 @@ function Register() {
      
     })
       .then((response) => {
-        setIsWait(false);
-        if (response.status === 200) {
+         if (response.status === 200) {
           return response.json();
         } else {
           setPopUpOpen(true)
@@ -56,28 +62,40 @@ function Register() {
           
         }
       });
+    fetch("http://192.168.1.111:8000/users/api/get_addreses/", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+       
+      })
+    .then((response) => {
+          
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            setPopUpOpen(true)
+            setMessage('server error try again !');
+          }
+        })
+    .then((data) => {
+          if (data) {
+            setAddreses(Array(data)[0])
+            
+          }
+        });
 
   },[])
 
 
   const handleRegistration = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/register_student/", {
+    fetch("http://192.168.1.111:8000/users/api/register_teacher/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password1: password1,
-        password2: password2,
-        phone:phone,
-        city:city,
-        discipline:discipline , 
-
-      }),
+      body: JSON.stringify(user),
     })
       .then((response) => {
         setIsWait(false);
@@ -107,8 +125,8 @@ function Register() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        code:code,
+        email: user.email,
+        code: user.code,
       }),
     })
       .then((response) => {
@@ -138,98 +156,91 @@ function Register() {
         }
       });
   };
-
-  
-
+ 
   return (
 
-    <div className="text-center rounded bg-white  border border-blue-900 m-3 p-2">
+    <div className="text-center rounded bg-white  border border-blue-400  my-3 p-1 mx-3 ">
               {!isRegistered ? (
                 <>
-                    <h3 className="text-blue-500 text-2xl font-bold">Sign Up</h3>
-                 
-                    <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
-                          <h2 className="text-red-500 w-72">{message}</h2>       
-                    </PopUp>
+                          <h3 className="text-blue-500 text-2xl font-bold">Sign Up</h3>
+                      
+                          <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
+                                <h2 className="text-red-500 w-72">{message}</h2>       
+                          </PopUp>
+                          <div className="grid grid-cols-2">
+                                  <input className={inputStyle}  type="text"   placeholder="First Name"   onChange = {(e) => setUser({ ...user, ['firstName']: e.target.value }) } />  
+                                  <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['LastName']: e.target.value }) }  /> 
+                                
+                          </div>
+                          <div className="grid grid-cols-1 ">                     
+                                        <input className={inputStyle}  type="email"   placeholder="Email" onChange = {(e) => setUser({ ...user, ['email']: e.target.value }) }  />  
+                                        <input className={inputStyle}  type="number"   placeholder="Phone" onChange = {(e) => setUser({ ...user, ['phone']: e.target.value }) }  /> 
+                                        <input className={inputStyle}  type="password"   placeholder="Password" onChange = {(e) => setUser({ ...user, ['password1']: e.target.value }) }  />
 
-                    <input type="text" className=" mb-2 border   border-blue-800 rounded p-1" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} /> <br></br>
-               
-                  
-                    <input type="text" className="  mb-2 border border-blue-800 rounded p-1" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} /> <br></br>
-                  
-                  
-                    <input type="email" className="  mb-2 border border-blue-800 rounded p-1" placeholder="Email" onChange={(e) => setEmail(e.target.value)} /> <br></br>
-                  
-                  
-                    <input type="password" className="  mb-2 border border-blue-800 rounded p-1" placeholder="Password" onChange={(e) => setPassword1(e.target.value)} /> <br></br>
-                  
-                  
-                    <input type="password" className="  mb-2 border border-blue-800 rounded p-1" placeholder="Confirm Password" onChange={(e) => setPassword2(e.target.value)} /> <br></br>
-                         
-                    <input type="number" className="  mb-2 border border-blue-800 rounded p-1" placeholder="Phone" onChange={(e) => setPhone(e.target.value)} /> <br></br>
-                  
-                  
-                    <input  className="  mb-2 border border-blue-800 rounded p-1" placeholder="city" onChange={(e) => setCity(e.target.value)} /> <br></br>
-                  
-            
-                    
-                    <select  className="  mb-2 border border-blue-800 rounded p-1 " id='discipline' style={{outline: "none"}} value={disciplines[0]}  onChange={ e => setDiscipline(e.target.value)}  >
-                             <option key={-1} value={-1}>chose division</option>
-                            {disciplines.map(o => (
-                                <option key={o.id} value={o.id}>{o.discipline}</option>
-                            ))}    
-                    </select>
-  
-                    <div className="text-center">
-                        {isWait === false ? (
-                          <button className="rounded border h-10 border-blue-700 bg-blue-500 p-1 m-auto w-1/3" onClick={handleRegistration}>
-                            Register
-                          </button>
-                        ) : (
-                          <button disabled className="rounded border border-gray-700 bg-gray-500 p-1 m-auto w-1/3" >
-                            <div className="max-h-10">
-                              <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
-                            </div>
-                          </button>
-                        )}
-                    
-                      </div>
-                  <div className="mt-3">
-                    <Link href="/login" className="text-decoration-none">Login</Link>
-                  </div>
+                                        <select  className={inputStyle}    id='discipline'    value={user.discipline}     onChange = {(e) => setUser({ ...user, ['discipline']: e.target.value }) }   >
+                                                <option key={-1} value={null}  ><span className="" >chose division</span></option>
+                                                {disciplines.map(o => (
+                                                    <option key={o.id} value={o.id}>{o.discipline}</option>
+                                                ))}    
+                                        </select>
+                                        <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
+                                                <option key={-1} value={null}  ><span className="" >chose an address</span></option>
+                                                {addreses.map(o => (
+                                                    <option key={o.id} value={o.address}>{o.address}</option>
+                                                ))}    
+                                        </select>
+                                        <div    className={inputStyle} >
+                                              <span className="text-left " style={{ display : 'inline-block',width:'21.5%'}}>sex :</span>  
+                                              <span className="ml-2">homme</span>  
+                                              <input className={inputStyle}  type="radio"  name="sex" value='male'  onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }  /> 
+                                              <span className="ml-2">femme</span>
+                                              <input className={inputStyle}   type="radio"    name="sex" value="female" onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }   />
+                                        </div>
+                          </div>
+                          <div className="text-center grid grid-cols-1 place-items-center">
+                                    {isWait === false ? (
+                                      <button className="border rounded-md h-10   bg-blue-600 p-1 text-white w-1/2" onClick={handleRegistration}>
+                                          Register
+                                      </button>
+                                    ) : (
+                                      <button disabled className="rounded border   bg-gray-600 text-white p-1" >
+                                        <div className="max-h-10">
+                                            <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
+                                        </div>
+                                      </button>
+                                    )} 
+                          </div>                               
+                          <hr   className="w-1/3 h-0.5 bg-gray-600 inline-block"></hr>  or <hr   className=" h-0.5 w-1/3 bg-gray-600 inline-block "></hr>
+                          
+                          <div className="mt-3 text-blue-600 visited:text-purple-800">
+                            <Link href="/login" className="text-decoration-none">Login</Link>
+                          </div>
                 </>
               ) : (
-                <>
-                  <h3 className="mb-4">Please confirm your email address to complete the registration</h3>
-                  <div className="alert alert-success">Registration Successful!</div>
-
-                  <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
-                          <h2 className="text-red-500 w-72">{message}</h2>       
+              <>
+                    <h3 className="mb-2 "> Please confirm your email address to complete the registration !</h3>
+ 
+                    <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
+                            <h2 className="text-red-500 w-72">{message}</h2>       
                     </PopUp>
 
-                  <input  className="  mb-2 border border-blue-800 rounded p-1" placeholder="code de verifacation" onChange={(e) => setCode(e.target.value)} /> <br></br>
-
-
-
-                     <div className="text-center">
+                    <input className={inputStyle}  placeholder="code de verifacation" onChange={(e) => setCode(e.target.value)} /> 
+  
+                     <div className = {btnDiv}>
                         {isWait === false ? (
-                          <button className="rounded border h-10 border-blue-700 bg-blue-500 p-1 m-auto w-1/3" onClick={handleVerification}>
+                          <button className={activeBtn}   onClick={handleVerification}>
                             Verification
                           </button>
                         ) : (
-                          <button disabled className="rounded border border-gray-700 bg-gray-500 p-1 m-auto w-1/3" >
-                            <div className="max-h-10">
+                          <button disabled   >
+                            <div className = {inactiveBtn} >
                               <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
                             </div>
                           </button>
                         )}
                     
-                      </div>
-                 
-                 
-                  
-
-                </>
+                    </div> 
+              </>
               )}
     </div>
 

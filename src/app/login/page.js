@@ -5,12 +5,16 @@ import { useState } from "react";
 import PopUp from '/src/components/general/pop-up.js'
 
 function Login(){
+    const inputStyle = "m-1 border focus:outline-none border-blue-200 rounded bg-blue-100 p-1"
+    const btnDiv  = "text-center grid grid-cols-1 place-items-center"
+    const activeBtn = "border rounded-md h-10 bg-blue-600 p-1 text-white w-1/2"
+    const inactiveBtn = "rounded-md border h-10 bg-gray-600 p-1 text-white " 
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isWait, setIsWait] = useState(false);
-    const [message, setMessage] = useState("");
 
-    
+    const [isWait, setIsWait] = useState(false);
+    const [message, setMessage] = useState("");  
     const [isPopUpOpen, setPopUpOpen] = useState(false);
 
     const openPopUp = () => {
@@ -56,7 +60,7 @@ function Login(){
       })}
 
     return(
-          <div className="text-center rounded bg-white  border border-blue-900 m-3 p-4">
+          <div className="text-center rounded bg-white  border border-blue-600 m-3 p-4">
                       <h1 className=" text-blue-500 text-2xl font-bold">Sign In</h1>
                     
                       <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
@@ -66,24 +70,24 @@ function Login(){
                       <div className="m-3">
                       
                         <label className="">Email</label><br></br>
-                        <input type="email" className="h-8 rounded border-blue-700 border" onChange={(e) => setEmail(e.target.value)} />
+                        <input className={inputStyle} type="email"   onChange={(e) => setEmail(e.target.value)} />
                         
 
 
                       </div>
                       <div className="m-3">
                         <label className="">Password</label> <br></br>
-                        <input type="password" className="h-8 rounded border-blue-700 border" onChange={(e) => setPassword(e.target.value)} />
+                        <input className={inputStyle} type="password"   onChange={(e) => setPassword(e.target.value)} />
                         
                       </div>
                 
-                      <div className="text-center">
+                      <div className={btnDiv}>
                         {isWait === false ? (
-                          <button className="rounded border h-10 border-blue-700 bg-blue-500 p-1 m-auto w-1/3" onClick={handleLogin}>
+                          <button className={activeBtn} onClick={handleLogin}>
                             Sign In
                           </button>
                         ) : (
-                          <button disabled className="rounded border border-gray-700 bg-gray-500 p-1 m-auto w-1/3" >
+                          <button disabled className={inactiveBtn} >
                             <div className="max-h-10">
                               <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
                             </div>

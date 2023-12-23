@@ -20,7 +20,7 @@ const Header = () => {
   }
   return (
           <div className="bg-white">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+            <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8">
             
             
               <div className="">

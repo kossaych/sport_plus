@@ -1,31 +1,36 @@
 import React from 'react';
 import Link from 'next/link';
+import { CiAlarmOff, CiApple, CiHeart, CiIndent } from 'react-icons/ci';
 
 const RegistrationPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-8">Choose Registration Type</h1>
-      <div className="flex flex-col gap-4">
-        <Link
-            href ="/register_teacher"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-xl shadow-md transition duration-300 ease-in-out"
-        >
-          Teacher Registration
-        </Link>
-        <Link
-          href="/register_parent"
-          className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-xl shadow-md transition duration-300 ease-in-out"
-        >
-          Parent Registration
-        </Link>
-        <Link
-          href="/register_student"
-          className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-xl shadow-md transition duration-300 ease-in-out"
-        >
-          Student Registration
-        </Link>
-      </div>
-    </div>
+    <div className = "bg-white rounded m-2 min-h-full grid grid-cols-1" >
+         <Link href="/register_student" className="flex  mx-5 my-5 items-center justify-around align-middle bg-white text-blue-400 border border-blue-400 px-8 py-4 rounded-lg text-xl  ">
+            <div  >
+              <CiApple size={50}></CiApple>
+            </div>
+            <div  >
+                Student  
+            </div>
+         </Link>
+          <Link href ="/register_teacher" className="flex items-center mx-5 my-5 justify-around align-middle bg-white text-blue-400 border border-blue-400 px-8 py-4 rounded-lg text-xl  ">
+          <div  >
+              <CiApple size={50}></CiApple>
+            </div>
+            <div  >
+                Teacher  
+            </div>
+          </Link>
+          <Link href="/register_parent" className="flex items-center mx-5 my-5 justify-around align-middle bg-white text-blue-400 border border-blue-400 px-8 py-4 rounded-lg text-xl  ">
+                <div  >
+                  <CiApple size={50}></CiApple>
+                </div>
+                <div  >
+                     Parent
+                </div>
+          </Link>
+        
+     </div>
   );
 };
 
