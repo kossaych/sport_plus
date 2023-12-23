@@ -101,8 +101,7 @@ function Register() {
       .then((response) => {
         setIsWait(false);
         if (response.status === 200) {
-          setPassword1("");
-          setPassword2("");
+         
           setIsRegistered(true);
         } else if (response.status === 400) {
           return response.json();
@@ -154,7 +153,7 @@ function Register() {
         } else {
           localStorage.setItem("token", JSON.stringify(data));
           window.location.href = "/";
-        }
+        }  
       });
   };
  
@@ -170,7 +169,7 @@ function Register() {
                           </PopUp>
                           <div className="grid grid-cols-2">
                                   <input className={inputStyle}  type="text"   placeholder="First Name"   onChange = {(e) => setUser({ ...user, ['firstName']: e.target.value }) } />  
-                                  <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['setLastName']: e.target.value }) }  /> 
+                                  <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['lastName']: e.target.value }) }  /> 
                                 
                           </div>
                           <div className="grid grid-cols-1 ">                     
@@ -225,7 +224,7 @@ function Register() {
                             <h2 className="text-red-500 w-72">{message}</h2>       
                     </PopUp>
 
-                    <input className={inputStyle}  placeholder="code de verifacation" onChange={(e) => setCode(e.target.value)} /> 
+                    <input className={inputStyle}  placeholder="code de verifacation" onChange = {(e) => setUser({ ...user, ['code']: e.target.value })} /> 
   
                      <div className = {btnDiv}>
                         {isWait === false ? (

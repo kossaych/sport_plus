@@ -1,6 +1,6 @@
 'use client'
-import React from 'react';
-import {CiBookmark, CiBoxList, CiChat1, CiCircleInfo, CiFacebook, CiHome, CiLogin, CiPen, CiSignpostDuo1, CiWallet} from 'react-icons/ci'
+import React, { useEffect, useState } from 'react';
+import {CiBookmark,  CiHome, CiLogin,  CiWallet} from 'react-icons/ci'
 import {CiLogout} from 'react-icons/ci'
 import {VscAccount, VscSignIn} from 'react-icons/vsc'
 import Link from 'next/link';
@@ -12,12 +12,14 @@ const Header = () => {
     window.location.reload();
     window.location.href='/'
   }
-  var logedIn = true
-  if(localStorage.getItem('token')){
-     logedIn = true
-  }else{
-     logedIn = false
+  let [logedIn,setLogetIn] = useState(true)
+  useEffect(() => { 
+    if(localStorage.getItem('token')){
+      setLogetIn(true)
+    }else{
+      setLogetIn(false)
   }
+  }, []);
   return (
           <div className="bg-white">
             <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8">
