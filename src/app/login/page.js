@@ -41,21 +41,24 @@ function Login(){
       },)
       .then(response =>{
           setIsWait(false)
-          if (response.status===200 || response.status===400){
-              
-              return response.json()
+          if (response.status===200 || response.status===400){ 
+              return {"data" : response.json(),"status" : response.status}
           }else{
               setMessage("server error 500")
               return 'server error 500'
           }
       })
       .then(data =>{
-          if (data === 'server error 500' || data ==='account not active' || data ==='false data' || data ==='email not regested'){
-            setMessage(data)
+           if (data.status != 200 ){
+            setMessage(data.data)
             setPopUpOpen(true)
           }else {
-            localStorage.setItem('token',JSON.stringify(data))
-            window.location.href='/'
+            data.data.then(function(result) {
+              localStorage.setItem('token',JSON.stringify(result))
+              window.location.href='/'
+
+            });
+            
           }
       })}
 

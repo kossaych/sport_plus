@@ -11,6 +11,7 @@ function Register() {
   const btnDiv  = "text-center grid grid-cols-1 place-items-center"
   const activeBtn = "border rounded-md h-10 bg-blue-600 p-1 text-white w-1/2"
   const inactiveBtn = "rounded-md border h-10 bg-gray-600 p-1 text-white "
+  
   const [user, setUser] = useState({ 
     "firstName" : "",
     "lastName" : "",
@@ -38,7 +39,6 @@ function Register() {
   const closePopUp = () => {
     setPopUpOpen(false);
   }
- 
   
   useEffect(()=>{
     fetch("http://192.168.1.111:8000/users/api/get_disciplines/", {
@@ -83,10 +83,7 @@ function Register() {
             setAddreses(Array(data)[0])
             
           }
-        });
-
-  },[])
-
+  });},[])
 
   const handleRegistration = () => {
     setIsWait(true);
@@ -97,24 +94,22 @@ function Register() {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => {
+    .then((response) => {
         setIsWait(false);
-        if (response.status === 200) {
-          setPassword1("");
-          setPassword2("");
+        if (response.status === 200) { 
           setIsRegistered(true);
         } else if (response.status === 400) {
           return response.json();
         } else if (response.status === 500) {
           return "server error 500";
         }
-      })
-      .then((data) => {
+    })
+    .then((data) => {
         if (!isRegistered && data) {
           setPopUpOpen(true)
           setMessage(data);
         }
-      });
+    });
   };
 
   const handleVerification = () => {
@@ -128,33 +123,28 @@ function Register() {
         email: user.email,
         code: user.code,
       }),
+    }) 
+    .then(response =>{
+        setIsWait(false)
+        if (response.status===200 || response.status===400){ 
+            return {"data" : response.json(),"status" : response.status}
+        }else{
+            setMessage("server error 500") 
+            return {"data" : "server error 500","status" : 500}
+        }
     })
-      .then((response) => {
-        setIsWait(false);
-        if (response.status === 200) {
-          return response.json();
-        } else if (response.status === 400) {
-          return response.json();
-        } else if (response.status === 500) {
-          return "server error 500";
-        }
-      })
-      .then((data) => {
-        
-        if (
-          data === 'code time'||
-          data === 'invalid code'||
-          data === 'code not sended to your email'||
-          data === "user not registed" ||
-          data === "server error 500"
-        ) {
+    .then(data =>{
+        if (data.status != 200 ){
+          setMessage(data.data)
           setPopUpOpen(true)
-          setMessage(data);
-        } else {
-          localStorage.setItem("token", JSON.stringify(data));
-          window.location.href = "/";
+        }else {
+          data.data.then(function(result) {
+            localStorage.setItem('token',JSON.stringify(result))
+            window.location.href='/' 
+          });
+          
         }
-      });
+    }) 
   };
  
   return (
@@ -169,7 +159,7 @@ function Register() {
                           </PopUp>
                           <div className="grid grid-cols-2">
                                   <input className={inputStyle}  type="text"   placeholder="First Name"   onChange = {(e) => setUser({ ...user, ['firstName']: e.target.value }) } />  
-                                  <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['LastName']: e.target.value }) }  /> 
+                                  <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['lastName']: e.target.value }) }  /> 
                                 
                           </div>
                           <div className="grid grid-cols-1 ">                     
@@ -224,7 +214,7 @@ function Register() {
                             <h2 className="text-red-500 w-72">{message}</h2>       
                     </PopUp>
 
-                    <input className={inputStyle}  placeholder="code de verifacation" onChange={(e) => setCode(e.target.value)} /> 
+                    <input className={inputStyle}  placeholder="code de verifacation" onChange = {(e) => setUser({ ...user, ['code']: e.target.value })} /> 
   
                      <div className = {btnDiv}>
                         {isWait === false ? (
