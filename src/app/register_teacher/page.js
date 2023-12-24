@@ -168,13 +168,13 @@ function Register() {
                                         <input className={inputStyle}  type="password"   placeholder="Password" onChange = {(e) => setUser({ ...user, ['password1']: e.target.value }) }  />
 
                                         <select  className={inputStyle}    id='discipline'    value={user.discipline}     onChange = {(e) => setUser({ ...user, ['discipline']: e.target.value }) }   >
-                                                <option key={-1} value={null}  ><span className="" >chose division</span></option>
+                                                <option>chose division</option>
                                                 {disciplines.map(o => (
                                                     <option key={o.id} value={o.id}>{o.discipline}</option>
                                                 ))}    
                                         </select>
                                         <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
-                                                <option key={-1} value={null}  ><span className="" >chose an address</span></option>
+                                                <option >chose an address </option>
                                                 {addreses.map(o => (
                                                     <option key={o.id} value={o.address}>{o.address}</option>
                                                 ))}    

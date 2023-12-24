@@ -52,7 +52,7 @@ function ChangePassword() {
       })
       .then((data) => {
         if (data === true) {
-          window.location.href = "/";
+          window.location.href = "/profile";
         } else {
         setPopUpOpen(true)
         setMessage(data);
@@ -70,15 +70,14 @@ function ChangePassword() {
                   <div className="">
                       <input className = {inputStyle} type="password" placeholder="Old password" onChange={(e) => setCurrentPassword(e.target.value)}/>
                       <input className = {inputStyle}  type="password" placeholder="new password" onChange={(e) => setNewPassword1(e.target.value)}/>
-                      <input className = {inputStyle} type="password"  placeholder="Confirm password" onChange={(e) => setNewPassword2(e.target.value)}/>
-                  </div>
+                   </div>
                   <div className={btnDiv}>
                           {isWait === false ? (
                             <>
                               <button className= {activeBtn} onClick={sendData}>
                                 Change 
                               </button>
-                              <Link href="/" className="text-red-500 ml-3">
+                              <Link href="/profile" className="text-red-500 ml-3">
                                 Cancel
                               </Link> 
                             </>

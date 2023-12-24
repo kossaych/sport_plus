@@ -39,7 +39,6 @@ function Register() {
   const closePopUp = () => {
     setPopUpOpen(false);
   }
- 
   
   useEffect(()=>{
     fetch("http://192.168.1.111:8000/users/api/get_levels/", {
@@ -84,10 +83,7 @@ function Register() {
             setAddreses(Array(data)[0])
             
           }
-        });
-
-  },[])
-
+  });},[])
 
   const handleRegistration = () => {
     setIsWait(true);
@@ -98,23 +94,22 @@ function Register() {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => {
+    .then((response) => {
         setIsWait(false);
-        if (response.status === 200) {
-         
+        if (response.status === 200) { 
           setIsRegistered(true);
         } else if (response.status === 400) {
           return response.json();
         } else if (response.status === 500) {
           return "server error 500";
         }
-      })
-      .then((data) => {
+    })
+    .then((data) => {
         if (!isRegistered && data) {
           setPopUpOpen(true)
           setMessage(data);
         }
-      });
+    });
   };
 
   const handleVerification = () => {
@@ -128,33 +123,28 @@ function Register() {
         email: user.email,
         code: user.code,
       }),
-    })
-      .then((response) => {
-        setIsWait(false);
-        if (response.status === 200) {
-          return response.json();
-        } else if (response.status === 400) {
-          return response.json();
-        } else if (response.status === 500) {
-          return "server error 500";
+    }) 
+    .then(response =>{
+        setIsWait(false)
+        if (response.status===200 || response.status===400){ 
+            return {"data" : response.json(),"status" : response.status}
+        }else{
+            setMessage("server error 500") 
+            return {"data" : "server error 500","status" : 500}
         }
-      })
-      .then((data) => {
-        
-        if (
-          data === 'code time'||
-          data === 'invalid code'||
-          data === 'code not sended to your email'||
-          data === "user not registed" ||
-          data === "server error 500"
-        ) {
+    })
+    .then(data =>{
+        if (data.status != 200 ){
+          setMessage(data.data)
           setPopUpOpen(true)
-          setMessage(data);
-        } else {
-          localStorage.setItem("token", JSON.stringify(data));
-          window.location.href = "/";
-        }  
-      });
+        }else {
+          data.data.then(function(result) {
+            localStorage.setItem('token',JSON.stringify(result))
+            window.location.href='/' 
+          });
+          
+        }
+    }) 
   };
  
   return (
@@ -178,13 +168,13 @@ function Register() {
                                         <input className={inputStyle}  type="password"   placeholder="Password" onChange = {(e) => setUser({ ...user, ['password1']: e.target.value }) }  />
 
                                         <select  className={inputStyle}    id='level'    value={user.level}     onChange = {(e) => setUser({ ...user, ['level']: e.target.value }) }   >
-                                                <option key={-1} value={null}  ><span className="" >chose division</span></option>
+                                                <option>chose division</option>
                                                 {levels.map(o => (
                                                     <option key={o.id} value={o.id}>{o.level}</option>
                                                 ))}    
                                         </select>
                                         <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
-                                                <option key={-1} value={null}  ><span className="" >chose an address</span></option>
+                                                <option >chose an address </option>
                                                 {addreses.map(o => (
                                                     <option key={o.id} value={o.address}>{o.address}</option>
                                                 ))}    

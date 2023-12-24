@@ -17,20 +17,29 @@ function Register() {
         lastName : "",
         bio : "" ,
         firstName:'',
-        level_or_descepline : {title  : ""},
+        level: {title  : ""},
+        descepline : {title  : ""},
         email : '',
         phone : '',
-        address : '',
-        imgCover:'',
-        imgProfile:'',
+        address : '',  
+        imgCoverUrl:'',
+        imgProfileUrl:''
 
-    })  
+    })   
+
+    const [imgCover,setImgCover] = useState('')
+    const [imgProfile,setImgProfile] = useState('')
+    const [level,setLevel] = useState('')
+    const [descepline,setDescepline] = useState('') 
 
     const [isPopUpOpen, setPopUpOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [disciplines, setDisciplines] = useState([]);
     const [addreses, setAddreses] = useState([]); 
     const [isWait, setIsWait] = useState(false);
+    const [isWaitLoading, setIsWaitLoading] = useState(true);
+    const [levels, setLevels] = useState([]);
+
 
     const openPopUp = () => {
         setPopUpOpen(true);
@@ -41,6 +50,7 @@ function Register() {
     } 
  
     useEffect(()=>{
+      
       fetch("http://192.168.1.111:8000/users/api/profile/", {
             method: "get",
             headers: {
@@ -60,11 +70,10 @@ function Register() {
             .then((data) => {
             if (data) {
                 setUser(Array(data)[0]) 
+                setIsWaitLoading(false)
             }
         });
-
-
-
+       
       fetch("http://192.168.1.111:8000/users/api/get_disciplines/", {
         method: "get",
         headers: {
@@ -87,6 +96,29 @@ function Register() {
         });
 
 
+        fetch("http://192.168.1.111:8000/users/api/get_levels/", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+     
+    })
+      .then((response) => {
+         if (response.status === 200) {
+          return response.json();
+        } else {
+          setPopUpOpen(true)
+          setMessage('server error try again !');
+        }
+      })
+      .then((data) => {
+        if (data) {
+          setLevels(Array(data)[0])
+          
+        }
+      });
+
+
 
       fetch("http://192.168.1.111:8000/users/api/get_addreses/", {
           method: "get",
@@ -107,149 +139,155 @@ function Register() {
       .then((data) => {
             if (data) {
               setAddreses(Array(data)[0])
-              
+
             }
     });},[])
- 
-    const handleRegistration = () => {
-      setIsWait(true);
-      fetch("http://192.168.1.111:8000/users/api/register_student/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((response) => {
-          setIsWait(false);
-          if (response.status === 200) {
-          
-            setIsRegistered(true);
-          } else if (response.status === 400) {
-            return response.json();
-          } else if (response.status === 500) {
-            return "server error 500";
-          }
-        })
-        .then((data) => {
-          if (!isRegistered && data) {
-            setPopUpOpen(true)
-            setMessage(data);
-          }
-        });
-    };
+     
+    const handleProfileEdit = () => {
+      var editedUser = new FormData()
+      editedUser.append('firstName', user.firstName) 
+      editedUser.append('lastName', user.lastName) 
 
-    const handleVerification = () => {
+      editedUser.append('imgCover',imgCover) 
+      editedUser.append('imgProfile',imgProfile)  
+
+      editedUser.append('level',level)
+      editedUser.append('descepline',descepline)
+
+      editedUser.append('role', user.role)
+      editedUser.append('email', user.email)
+      editedUser.append('phone', user.phone)
+      editedUser.append('address', user.address) 
+      editedUser.append('sex', user.sex) 
+
+
       setIsWait(true);
-      fetch("http://192.168.1.111:8000/users/api/activate/", {
+      fetch("http://192.168.1.111:8000/users/api/profile/", {
         method: "post",
         headers: {
-          "Content-Type": "application/json",
+           'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+
         },
-        body: JSON.stringify({
-          email: user.email,
-          code: user.code,
-        }),
-      })
-        .then((response) => {
-          setIsWait(false);
-          if (response.status === 200) {
-            return response.json();
-          } else if (response.status === 400) {
-            return response.json();
-          } else if (response.status === 500) {
-            return "server error 500";
-          }
-        })
-        .then((data) => {
-          
-          if (
-            data === 'code time'||
-            data === 'invalid code'||
-            data === 'code not sended to your email'||
-            data === "user not registed" ||
-            data === "server error 500"
-          ) {
-            setPopUpOpen(true)
-            setMessage(data);
-          } else {
-            localStorage.setItem("token", JSON.stringify(data));
-            window.location.href = "/";
-          }  
-        });
-    };
+        body: (editedUser),
+      }) .then(response =>{
+        setIsWait(false)
+        if (response.status===200 || response.status===400){ 
+            return {"data" : response.json(),"status" : response.status}
+        }else{
+            setMessage("server error 500")
+            return 'server error 500'
+        }
+      }) .then(data =>{
+            if (data.status != 200 ){
+              setMessage(data.data)
+              setPopUpOpen(true)
+            }else {
+              data.data.then(function(result) {
+                localStorage.setItem('token',JSON.stringify(result))
+               // window.location.href='/profile'
+              })
+            };
+      })};
   
+
+
     return (
-    <div className="text-center rounded bg-white  border border-blue-400  my-3 p-1 mx-3 "> 
-    
-                            <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
-                                    <h2 className="text-red-500 w-72">{message}</h2>       
-                            </PopUp> 
-
-                            <div className="rounded-t-lg h-32 flex justify-end"> 
-                                <img className="w-full object-cover object-center" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' />
-                                <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
-                                        <CiEdit size={24} /> 
-                                        <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) => handleFileUpload(e.target.files[0])} />
-                                </label> 
-                            </div> 
-                            <label className="absolute bg-gray-600 text-white rounded-full p-1 m-7 z-10" > 
-                                        <CiEdit size={24} /> 
-                                        <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) => handleFileUpload(e.target.files[0])} />
-                            </label> 
-                            <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
-                                
-                                <img className="object-cover object-center h-32" src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Woman looking front' />
-                            </div> 
-
-                            <h3 className="text-blue-500 text-2xl font-bold">edit profile</h3>
-
-                            <div className="grid grid-cols-2">
-                                    <input className={inputStyle}  type="text"   placeholder="First Name"   onChange = {(e) => setUser({ ...user, ['firstName']: e.target.value }) } />  
-                                    <input className={inputStyle}  type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['lastName']: e.target.value }) }  /> 
-                                    
-                            </div>
-
-                            <div className="grid grid-cols-1 ">   
-                            
-                                            <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
-                                                    <option key={-1} value={null}  ><span className="" >chose an address</span></option>
-                                                    {addreses.map(o => (
-                                                        <option key={o.id} value={o.address}>{o.address}</option>
-                                                    ))}    
-                                            </select>
-                                            <div    className={inputStyle} >
-                                                <span className="text-left " style={{ display : 'inline-block',width:'21.5%'}}>sex :</span>  
-                                                <span className="ml-2">homme</span>  
-                                                <input className={inputStyle}  type="radio"  name="sex" value='male'  onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }  /> 
-                                                <span className="ml-2">femme</span>
-                                                <input className={inputStyle}   type="radio"    name="sex" value="female" onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }   />
-                                            </div>
-                            </div> 
-
-                            <div className="text-center grid grid-cols-1 place-items-center">
-                                        {isWait === false ? (
-                                        <button className="border rounded-md h-10   bg-blue-600 p-1 text-white w-1/2" onClick={handleRegistration}>
-                                            Edit
-                                        </button>
-                                        ) : (
-                                        <button disabled className="rounded border   bg-gray-600 text-white p-1" >
-                                            <div className="max-h-10">
-                                                <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
-                                            </div>
-                                        </button>
-                                        )} 
-                            </div>   
-
-                            <div className="mt-3 text-red-600 ">
-                                <Link href="/login" className="text-decoration-none">cancel</Link>
-                            </div>
-           
+          <>
+            {isWaitLoading == true ? <div class='absolute bg-black h-full z-40 w-full object-cover object-center opacity-20   '>
                
-    </div>
+            </div> : ""} 
+        
+        <div className="text-center rounded bg-white  border border-blue-400  my-3 p-1 mx-3 "  > 
+        
+                                <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
+                                        <h2 className="text-red-500 w-72">{message}</h2>       
+                                </PopUp> 
 
-    );
+                                <div className="rounded-t-lg h-32 flex justify-end">  
+                                    {isWaitLoading == false ? <img className="w-full object-cover object-center"src={"http://192.168.1.111:8000/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
+                                    <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
+                                            <CiEdit size={24} /> 
+                                            <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) =>setImgCover(e.target.files[0])} />
+                                    </label>  
+                                </div> 
+                                <label className="absolute bg-gray-600 text-white rounded-full p-1 m-7 z-10" > 
+                                            <CiEdit size={24} /> 
+                                            <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) =>setImgProfile(e.target.files[0])}/>
+                                </label> 
+                                <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
+                                    
+                                {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full" src= {"http://192.168.1.111:8000/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
+                                </div>  
 
+                                <h3 className="text-blue-500 text-2xl font-bold">edit profile</h3>
+
+                                <div className="grid grid-cols-2">
+                                        <input className={inputStyle} value={user.firstName}  type="text"   placeholder="First Name"   onChange = {(e) => setUser({ ...user, ['firstName']: e.target.value }) } />  
+                                        <input className={inputStyle} value={user.lastName} type="text"   placeholder="Last Name" onChange = {(e) => setUser({ ...user, ['lastName']: e.target.value }) }  /> 
+                                        
+                                </div>
+
+                                <div className="grid grid-cols-1 ">   
+                                
+                                                <select   className={inputStyle} id='address' value={user.address} onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
+                                                        <option   >chose an address </option>
+                                                        {addreses.map(o => (
+                                                            <option key={o.id} value={o.address}>{o.address}</option>
+                                                        ))}    
+                                                </select>
+
+                                                
+                                                {user.role == 'teacher' ? <select  className={inputStyle}  value={descepline}   id='discipline'  onChange = {(e) => setDescepline( e.target.value ) }   >
+                                                <option className="hidden">{user.descepline.title}</option> 
+                                                {disciplines.map(o => (
+                                                      <option key={o.id} value={o.id}>{o.discipline}</option>
+                                                  ))}    
+                                                 </select> : <select  className={inputStyle} value={level} id='level' onChange = {(e) => {setLevel( e.target.value )}}  >
+                                                   <option className="hidden">{user.level.title}</option>
+                                                   {levels.map(o => (
+                                                      <option key={o.id} value={o.id}>{o.level}</option>
+                                                  ))}    
+                                                 </select> }
+                                                
+                                                
+                                                
+                                                
+
+
+
+
+                                                <div    className={inputStyle} >
+                                                    <span className="text-left " style={{ display : 'inline-block',width:'21.5%'}}>sex :</span>  
+                                                    <span className="ml-2">homme</span>  
+                                                    <input className={inputStyle}  type="radio" checked={user.sex == 'male'}  name="sex" value='male'  onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }  /> 
+                                                    <span className="ml-2">femme</span>
+                                                    <input className={inputStyle}   type="radio" checked={user.sex == 'female'} name="sex" value="female" onChange = {(e) => setUser({ ...user, ['sex']: e.target.value }) }   />
+                                                </div>
+                                </div> 
+
+                                <div className="text-center grid grid-cols-1 place-items-center">
+                                            {isWait === false ? (
+                                            <button className="border rounded-md h-10   bg-blue-600 p-1 text-white w-1/2" onClick={handleProfileEdit}>
+                                                Edit
+                                            </button>
+                                            ) : (
+                                            <button disabled className="rounded border   bg-gray-600 text-white p-1" >
+                                                <div className="max-h-10">
+                                                    <div  className="w-8 h-8 border-4 border-blue-400 border-dashed rounded-full animate-spin m-auto"></div>
+                                                </div>
+                                            </button>
+                                            )} 
+                                </div>   
+
+                                <div className="mt-3 text-red-600 ">
+                                    <Link href="/profile" className="text-decoration-none">cancel</Link>
+                                </div>
+              
+                  
+        </div>
+          </>
+
+    ); 
 
 
 
