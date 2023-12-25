@@ -22,7 +22,8 @@ function Register() {
     "phone" : "",
     "address" : "",
     "sex" : "",
-    "level": "" 
+    "level": "" ,
+    'role' : 'student'
   });
 
   const [levels, setLevels] = useState([]);
@@ -87,7 +88,7 @@ function Register() {
 
   const handleRegistration = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/register_student/", {
+    fetch("http://192.168.1.111:8000/users/api/register/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

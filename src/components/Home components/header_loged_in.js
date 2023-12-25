@@ -1,25 +1,15 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import {CiBookmark,  CiHome, CiLogin,  CiWallet} from 'react-icons/ci'
+import { CiHome,  CiWallet} from 'react-icons/ci'
 import {CiLogout} from 'react-icons/ci'
-import {VscAccount, VscSignIn} from 'react-icons/vsc'
+import {VscAccount} from 'react-icons/vsc'
 import Link from 'next/link';
-import { FaBook, FaCashRegister, FaFacebookMessenger, FaList, FaRegistered } from 'react-icons/fa';
-
+ 
 const Header = () => {
   function logout(){
     localStorage.removeItem('token');
     window.location.reload();
     window.location.href='/'
   }
-  let [logedIn,setLogetIn] = useState(true)
-  useEffect(() => { 
-    if(localStorage.getItem('token')){
-      setLogetIn(true)
-    }else{
-      setLogetIn(false)
-  }
-  }, []);
+ 
   return (
           <div className="bg-white">
             <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8">
@@ -41,7 +31,7 @@ const Header = () => {
 
              
              
-                  {logedIn ?<>
+                  
                     <Link  className="ml-5 text-sm font-semibold leading-6 text-gray-900"  href='/' ><CiHome size={25}></CiHome>Home</Link>
 
                     <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900">
@@ -58,20 +48,7 @@ const Header = () => {
                         <CiLogout size={25} /> logout
                     </Link> 
                     
-                  </>
-
-                  :< >
-            
-
-                  <Link href="/register" className="ml-5 text-sm font-semibold leading-6 text-gray-900">
-                    <CiBookmark size = {25}/> SignUp
-                  </Link>
-
-                  <Link href="/login" className="ml-5 text-sm font-semibold leading-6 text-gray-900" >
-                      <CiLogin size={25} /> login
-                  </Link> 
-                  
-                  </>}
+                   
 
                </div>
 

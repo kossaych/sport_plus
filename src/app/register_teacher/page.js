@@ -22,7 +22,8 @@ function Register() {
     "phone" : "",
     "address" : "",
     "sex" : "",
-    "discipline": "" 
+    "discipline": "" ,
+    'role' :'student'
   });
 
   const [disciplines, setDisciplines] = useState([]);

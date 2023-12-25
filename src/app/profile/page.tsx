@@ -1,8 +1,7 @@
 'use client'
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CiBoxList, CiEdit, CiStar } from "react-icons/ci";
- 
+  
 export default function Profile() {
     const [user,setUser] = useState({
         lastName : "",
@@ -17,8 +16,7 @@ export default function Profile() {
         imgProfileUrl:'',
         role : ''
 
-    })  
-
+    })   
     const [isPopUpOpen, setPopUpOpen] = useState(false);
     const [message, setMessage] = useState("");
     const [isWaitLoading, setIsWaitLoading] = useState(true);
@@ -101,4 +99,4 @@ export default function Profile() {
                 </div>
         </>
     )
-  }
+}
