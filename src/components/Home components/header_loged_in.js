@@ -1,4 +1,4 @@
-import { CiHome,  CiWallet} from 'react-icons/ci'
+import { CiBank, CiBitcoin, CiCoinInsert, CiCoins1, CiGlobe, CiHome,  CiMoneyBill,  CiMountain1,  CiWallet} from 'react-icons/ci'
 import {CiLogout} from 'react-icons/ci'
 import {VscAccount} from 'react-icons/vsc'
 import Link from 'next/link';
@@ -33,20 +33,21 @@ const Header = () => {
              
                   
                     <Link  className="ml-5 text-sm font-semibold leading-6 text-gray-900"  href='/' ><CiHome size={25}></CiHome>Home</Link>
-
-                    <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900">
-            
+                    <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900" onClick={logout}>
+                        <CiCoinInsert size={25} /> offes
+                    </Link> 
+                    <Link href="#" className="ml-5 text-sm font-semibold leading-6 hidden text-gray-900">
                           <CiWallet size={25} /> wallet
-            
-                        </Link>
+                    </Link>
                   
                     <Link href="/profile" className="ml-5 text-sm font-semibold leading-6 text-gray-900">
-                    <VscAccount size = {25}/> Profile
+                       <VscAccount size = {25} className='text-sm text-gray-600'/> Profile 
                     </Link>
                 
-                      <Link href="#" className="ml-5 text-sm font-semibold leading-6 text-gray-900" onClick={logout}>
+                    <Link href="#"  className="ml-5 text-sm font-semibold leading-6 text-gray-900" onClick={logout}>
                         <CiLogout size={25} /> logout
                     </Link> 
+                     
                     
                    
 

@@ -19,17 +19,15 @@ export default function Profile() {
     })   
     const [isPopUpOpen, setPopUpOpen] = useState(false);
     const [message, setMessage] = useState("");
-    const [isWaitLoading, setIsWaitLoading] = useState(true);
-
-
     const openPopUp = () => {
         setPopUpOpen(true);
-
     }
     const closePopUp = () => {
         setPopUpOpen(false);
     } 
     
+    const [isWaitLoading, setIsWaitLoading] = useState(true);
+
     useEffect(()=>{ 
         fetch("http://192.168.1.111:8000/users/api/profile/", {
             method: "get",

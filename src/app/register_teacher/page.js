@@ -23,7 +23,7 @@ function Register() {
     "address" : "",
     "sex" : "",
     "discipline": "" ,
-    'role' :'student'
+    'role' :'teacher'
   });
 
   const [disciplines, setDisciplines] = useState([]);
@@ -88,7 +88,7 @@ function Register() {
 
   const handleRegistration = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/register_teacher/", {
+    fetch("http://192.168.1.111:8000/users/api/register/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -171,7 +171,7 @@ function Register() {
                                         <select  className={inputStyle}    id='discipline'    value={user.discipline}     onChange = {(e) => setUser({ ...user, ['discipline']: e.target.value }) }   >
                                                 <option>chose division</option>
                                                 {disciplines.map(o => (
-                                                    <option key={o.id} value={o.id}>{o.discipline}</option>
+                                                    <option key={o.id} value={o.id}>{o.title}</option>
                                                 ))}    
                                         </select>
                                         <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >

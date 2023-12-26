@@ -35,9 +35,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100">
-          {}
-          <HeaderLogedIn></HeaderLogedIn>
-          <HeaderLogedOut></HeaderLogedOut>
+          {logedIn ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+         
           {children}
           <Footer></Footer>
         </div>
