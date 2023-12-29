@@ -31,7 +31,7 @@ function ResetPassword() {
 
   const sendEmail = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/reset_password/", {
+    fetch("http://192.168.1.111:8000/content/api/reset_password/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ function ResetPassword() {
   }; 
   const sendVerificationCode = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/check_code/", {
+    fetch("http://192.168.1.111:8000/content/api/check_code/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ function ResetPassword() {
   }; 
   const sendPassword = () => {
     setIsWait(true);
-    fetch("http://192.168.1.111:8000/users/api/set_password/", {
+    fetch("http://192.168.1.111:8000/content/api/set_password/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

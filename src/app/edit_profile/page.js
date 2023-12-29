@@ -9,10 +9,7 @@ import { CiEdit } from "react-icons/ci";
 
 function Register() {
     const inputStyle = "m-1 border focus:outline-none border-blue-200 rounded bg-blue-100 p-1"
-    const btnDiv  = "text-center grid grid-cols-1 place-items-center"
-    const activeBtn = "border rounded-md h-10 bg-blue-600 p-1 text-white w-1/2"
-    const inactiveBtn = "rounded-md border h-10 bg-gray-600 p-1 text-white "
-
+ 
     const [user,setUser] = useState({
         lastName : "",
         bio : "" ,
@@ -39,7 +36,40 @@ function Register() {
     const [isWait, setIsWait] = useState(false);
     const [isWaitLoading, setIsWaitLoading] = useState(true);
     const [levels, setLevels] = useState([]);
+    
 
+
+    const [imageCover, setImageCover] = useState("");
+    const [imageProfile, setImageProfile] = useState("");
+  
+    const handleProfileImageChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setImageProfile(selectedImage)
+      if (selectedImage) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setImgProfile(reader.result);
+          }
+        };
+        reader.readAsDataURL(selectedImage);
+      }
+    };
+    const handleCoverImageChange = (e) => {
+      const selectedImage = e.target.files[0];
+      setImageCover(selectedImage)
+      if (selectedImage) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setImgCover(reader.result);
+          }
+        };
+        reader.readAsDataURL(selectedImage);
+      }
+    };
+
+    
 
     const openPopUp = () => {
         setPopUpOpen(true);
@@ -51,7 +81,7 @@ function Register() {
  
     useEffect(()=>{
       
-      fetch("http://192.168.1.111:8000/users/api/profile/", {
+      fetch("http://192.168.1.111:8000/content/api/profile/", {
             method: "get",
             headers: {
                 'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -74,7 +104,7 @@ function Register() {
             }
         });
        
-      fetch("http://192.168.1.111:8000/users/api/get_disciplines/", {
+      fetch("http://192.168.1.111:8000/content/api/get_disciplines/", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +126,7 @@ function Register() {
         });
 
 
-        fetch("http://192.168.1.111:8000/users/api/get_levels/", {
+        fetch("http://192.168.1.111:8000/content/api/get_levels/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +150,7 @@ function Register() {
 
 
 
-      fetch("http://192.168.1.111:8000/users/api/get_addreses/", {
+      fetch("http://192.168.1.111:8000/content/api/get_addreses/", {
           method: "get",
           headers: {
             "Content-Type": "application/json",
@@ -148,8 +178,8 @@ function Register() {
       editedUser.append('firstName', user.firstName) 
       editedUser.append('lastName', user.lastName) 
 
-      editedUser.append('imgCover',imgCover) 
-      editedUser.append('imgProfile',imgProfile)  
+      editedUser.append('imgCover',imageCover) 
+      editedUser.append('imgProfile',imageProfile)  
 
       editedUser.append('level',level)
       editedUser.append('descepline',descepline)
@@ -162,7 +192,7 @@ function Register() {
 
 
       setIsWait(true);
-      fetch("http://192.168.1.111:8000/users/api/profile/", {
+      fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "post",
         headers: {
            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -188,7 +218,7 @@ function Register() {
               })
             };
       })};
-  
+   
 
 
     return (
@@ -202,22 +232,109 @@ function Register() {
                                 <PopUp isOpen={isPopUpOpen} onClose={closePopUp} >
                                         <h2 className="text-red-500 w-72">{message}</h2>       
                                 </PopUp> 
+ 
 
-                                <div className="rounded-t-lg h-32 flex justify-end">  
-                                    {isWaitLoading == false ? <img className="w-full object-cover object-center"src={"http://192.168.1.111:8000/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
-                                    <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
-                                            <CiEdit size={24} /> 
-                                            <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) =>setImgCover(e.target.files[0])} />
-                                    </label>  
-                                </div> 
+                                <div> 
+                                  {imgCover ? (
+                                      <>
+                                            
+                                            <div className="rounded-t-lg h-32 flex justify-end">  
+                                  
+                                  
+                                                {isWaitLoading == false ? <img className="w-full object-cover object-center" src={imgCover} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
+                                
+                                
+                                                <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
+                                                        <CiEdit size={24} /> 
+                                                        <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={handleCoverImageChange} />
+                                                </label>  
+
+
+                                            </div> 
+
+
+                                      </>
+                                   
+                                  ) : (
+                                    <> 
+                                    <div className="rounded-t-lg h-32 flex justify-end">  
+                                  
+                                  
+                                  {isWaitLoading == false ? <img className="w-full object-cover object-center" src={"http://192.168.1.111:8000/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
+                  
+                  
+                                  <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
+                                          <CiEdit size={24} /> 
+                                          <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={handleCoverImageChange} />
+                                  </label>  
+
+
+                              </div> 
+                                    </>
+                                    
+                                  )}
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+                              
+                
                                 <label className="absolute bg-gray-600 text-white rounded-full p-1 m-7 z-10" > 
                                             <CiEdit size={24} /> 
-                                            <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={(e) =>setImgProfile(e.target.files[0])}/>
+                                            <input type="file" accept="image/*" onChange={handleProfileImageChange} className="hidden"    />
                                 </label> 
-                                <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
+                                <div> 
+                                  {imgProfile ? (
+                                      <>
+                                            
+                                            <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
+                                                  {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full"    src={imgProfile} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
+                                            </div>  
+                                      </>
+                                   
+                                  ) : (
+                                    <>
+                                            <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
+                
+                                              {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full" src= {"http://192.168.1.111:8000/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
+                                            </div>  
                                     
-                                {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full" src= {"http://192.168.1.111:8000/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
-                                </div>  
+                                    </>
+                                    
+                                  )}
+                                </div>
+
 
                                 <h3 className="text-blue-500 text-2xl font-bold">edit profile</h3>
 
@@ -288,9 +405,7 @@ function Register() {
           </>
 
     ); 
-
-
-
+ 
 }
 
 export default Register;

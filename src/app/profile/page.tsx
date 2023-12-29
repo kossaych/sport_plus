@@ -29,7 +29,7 @@ export default function Profile() {
     const [isWaitLoading, setIsWaitLoading] = useState(true);
 
     useEffect(()=>{ 
-        fetch("http://192.168.1.111:8000/users/api/profile/", {
+        fetch("http://192.168.1.111:8000/content/api/profile/", {
             method: "get",
             headers: {
                 'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),

@@ -1,4 +1,5 @@
 'use client';
+import { counter } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -19,7 +20,7 @@ const Subject = () => {
 
   useEffect(()=>{
 
-    fetch("http://192.168.1.111:8000/users/api/get_disciplines/", {
+    fetch("http://192.168.1.111:8000/content/api/get_disciplines/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -67,13 +68,16 @@ const Subject = () => {
 
 
           {subjects.map((subject) => (
+
+             
+
             <Link className="my-progress-item" href={`/subjects/${subject.id}`} key={subject.id}>
               <div className="flex items-center">
                 <div className="mr-4">
                   <img
                     src={"http://192.168.1.111:8000/media/" + subject.image}
                     alt={subject.title}
-                    className=" h-16 w-16"
+                    className=" h-10 w-10 m-2"
                   />
                 </div>
                 <div className="flex flex-col ">
@@ -90,6 +94,7 @@ const Subject = () => {
                 </div>  
               </div>
             </Link>
+
           ))}
         </div>
       </div>
