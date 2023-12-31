@@ -99,7 +99,7 @@ const Subject = (props) => {
         {subject.chapiters.length === 0 && isWaitLoading === false ? 'there is no content' : '' }
         {subject.chapiters.map(chapiter => ( 
           
-          <Link className="" href={`/chapiters/${subject.id}`} key={subject.id}>
+          <Link className="" href={`/chapiters/${chapiter.id}`} key={chapiter.id}>
               <div   className = ' p-2 bg-emerald-50 rounded-xl mx-1 my-3  '>
                       <div className='m-2 flex  '>
                           <h2 className='text-red-400    m-2 text-2xl font-semibold' >{chapiter.counter}</h2>
