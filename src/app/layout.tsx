@@ -23,19 +23,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
  
-  let [logedIn,setLogetIn] = useState(true)
-  useEffect(() => { 
-    if(localStorage.getItem('token')){
-      setLogetIn(true)
-    }else{
-      setLogetIn(false)
-  }
-  }, []);
-  return (
+  const token  = localStorage.getItem('token') 
+   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100">
-          {logedIn ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+          {token != null ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
          
           {children}
           <Footer></Footer>

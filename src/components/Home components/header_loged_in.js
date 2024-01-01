@@ -5,16 +5,14 @@ import Link from 'next/link';
  
 const Header = () => {
   function logout(){
-    localStorage.removeItem('token');
-    window.location.reload();
     window.location.href='/'
+    localStorage.removeItem('token'); 
+    
   }
  
   return (
           <div className="bg-white">
-            <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8">
-            
-            
+            <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8"> 
               <div className="">
                 <Link href="/" >
                   
@@ -23,10 +21,7 @@ const Header = () => {
                 </Link>
                 
                   
-              </div>
-
-              
-              
+              </div>      
               <div className="flex justify-between ">
 
              
@@ -51,11 +46,7 @@ const Header = () => {
                     
                    
 
-               </div>
-
-
-
-
+               </div> 
             </nav>     
           </div>
       
