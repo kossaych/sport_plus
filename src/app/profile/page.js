@@ -29,7 +29,7 @@ export default function Profile() {
     const [isWaitLoading, setIsWaitLoading] = useState(true);
 
     useEffect(()=>{ 
-        fetch("http://192.168.1.111:8000/content/api/profile/", {
+        fetch("https://educa-back.vercel.app/content/api/profile/", {
             method: "get",
             headers: {
                 'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -63,13 +63,13 @@ export default function Profile() {
                  
                  
                     <div className="rounded-t-lg w-full h-32 flex justify-end">  
-                        {isWaitLoading == false ? <img className="w-full object-cover object-center"src={"http://192.168.1.111:8000/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
+                        {isWaitLoading == false ? <img className="w-full object-cover object-center"src={"https://educa-back.vercel.app/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
                             
                     </div> 
                         
                     <div className="mx-auto  h-32 w-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
                         
-                    {isWaitLoading == false ?  <img className="object-cover object-center h-32 w-full" src= {"http://192.168.1.111:8000/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
+                    {isWaitLoading == false ?  <img className="object-cover object-center h-32 w-full" src= {"https://educa-back.vercel.app/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
                     </div>  
 
 
