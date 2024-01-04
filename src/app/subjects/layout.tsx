@@ -2,8 +2,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Footer from "@/components/Home components/footer";
-import Header from "@/components/Home components/header";
-import Lives from "@/components/Home components/lives";
+ import Lives from "@/components/Home components/lives";
 import Offer from "@/components/Home components/offer";
 import Subjects from "@/components/Home components/subjects";
 import Subject from '@/components/Home components/subjects';

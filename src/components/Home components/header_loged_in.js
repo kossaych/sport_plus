@@ -1,3 +1,4 @@
+'use client'
 import { CiBank, CiBitcoin, CiCoinInsert, CiCoins1, CiGlobe, CiHome,  CiMoneyBill,  CiMountain1,  CiWallet} from 'react-icons/ci'
 import {CiLogout} from 'react-icons/ci'
 import {VscAccount} from 'react-icons/vsc'
@@ -5,10 +6,12 @@ import Link from 'next/link';
  
 const Header = () => {
   function logout(){
-    window.location.href='/'
-    localStorage.removeItem('token'); 
-    
+    if (typeof window !== 'undefined') {
+     
+    }
+
   }
+ 
  
   return (
           <div className="bg-white">

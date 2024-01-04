@@ -5,8 +5,7 @@ import { Inter } from 'next/font/google'
 import Footer from "@/components/Home components/footer";
 import HeaderLogedIn from '@/components/Home components/header_loged_in';
 import HeaderLogedOut from '@/components/Home components/header_loget_out'
-import { useEffect, useState } from 'react';
-
+ 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -22,15 +21,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
- 
-  const token  = localStorage.getItem('token') 
+
+  let token = null
+  if (typeof window !== 'undefined') {
+    const token  = localStorage.getItem('token') 
+   }
+
+
    return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100">
           {token != null ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
-         
-          {children}
+             {children}
           <Footer></Footer>
         </div>
         

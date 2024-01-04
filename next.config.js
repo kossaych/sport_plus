@@ -8,6 +8,6 @@ const nextConfig = {
           skipWaiter: true, 
       })
 }
+
+
 module.exports = nextConfig
-
-

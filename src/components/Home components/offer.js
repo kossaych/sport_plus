@@ -14,10 +14,10 @@ const Offer = ({ username, offer, expirationDate, progress }) => {
           <div>
           <div className="mb-4">
 
-<h2 className="text-xl text-center m-4 text-gray-800">
- Hello {username} !
-</h2>
-</div>
+            <h2 className="text-xl text-center m-4 text-gray-800">
+            Hello {username} !
+            </h2>
+            </div>
               <h2 className="text-xl text-center text-red-600 ">{offer}</h2>
 
               <div className="flex flex-col">
@@ -32,7 +32,7 @@ const Offer = ({ username, offer, expirationDate, progress }) => {
               </div>
               <div className="mb-4">
             <p className="text-gray-700">
-              Date d'expiration : {expirationDate}
+              Date d`&apos;`expiration : {expirationDate}
             </p>
               </div>
           </div>

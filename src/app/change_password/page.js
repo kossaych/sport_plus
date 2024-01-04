@@ -5,9 +5,12 @@ import Link from 'next/link';
 import PopUp from '/src/components/general/pop-up.js'
 
 function ChangePassword() { 
-  if(!(localStorage.getItem('token'))){
-    window.location.href = "/";
+  if (typeof window !== 'undefined') {
+    if(!(localStorage.getItem('token'))){
+      window.location.href = "/";
+    }
   }
+
   const inputStyle = "m-1 border focus:outline-none border-blue-200 rounded bg-blue-100 p-1"
   const btnDiv  = "text-center grid grid-cols-1 place-items-center"
   const activeBtn = "border rounded-md h-10 bg-blue-600 p-1 text-white w-1/2"
