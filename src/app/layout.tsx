@@ -21,18 +21,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
-  let token = null
-  if (typeof window !== 'undefined') {
-    const token  = localStorage.getItem('token') 
-   }
-
+ 
+     const token  = localStorage.getItem('token') 
+ 
+console.log(token)
 
    return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100">
-          {token != null ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+          {token  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
              {children}
           <Footer></Footer>
         </div>

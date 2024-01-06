@@ -81,7 +81,7 @@ function Register() {
  
     useEffect(()=>{
       
-      fetch("https://educa-back.vercel.app/content/api/profile/", {
+      fetch("http://192.168.1.111:8000/content/api/profile/", {
             method: "get",
             headers: {
                 'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -104,7 +104,7 @@ function Register() {
             }
         });
        
-      fetch("https://educa-back.vercel.app/content/api/get_disciplines/", {
+      fetch("http://192.168.1.111:8000/content/api/get_disciplines/", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -126,7 +126,7 @@ function Register() {
         });
 
 
-        fetch("https://educa-back.vercel.app/content/api/get_levels/", {
+        fetch("http://192.168.1.111:8000/content/api/get_levels/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +150,7 @@ function Register() {
 
 
 
-      fetch("https://educa-back.vercel.app/content/api/get_addreses/", {
+      fetch("http://192.168.1.111:8000/content/api/get_addreses/", {
           method: "get",
           headers: {
             "Content-Type": "application/json",
@@ -192,7 +192,7 @@ function Register() {
 
 
       setIsWait(true);
-      fetch("https://educa-back.vercel.app/content/api/profile/", {
+      fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "post",
         headers: {
            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -260,7 +260,7 @@ function Register() {
                                     <div className="rounded-t-lg h-32 flex justify-end">  
                                   
                                   
-                                  {isWaitLoading == false ? <img className="w-full object-cover object-center" src={"https://educa-back.vercel.app/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
+                                  {isWaitLoading == false ? <img className="w-full object-cover object-center" src={"http://192.168.1.111:8000/media/" + user.imgCoverUrl} alt = 'cover image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto z-40"></div>}
                   
                   
                                   <label className="absolute bg-gray-600 text-white rounded-full p-1 m-2" > 
@@ -327,7 +327,7 @@ function Register() {
                                     <>
                                             <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden flex justify-end items-end ">
                 
-                                              {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full" src= {"https://educa-back.vercel.app/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
+                                              {isWaitLoading == false ?  <img className="object-cover object-center h-32  w-full" src= {"http://192.168.1.111:8000/media/" + user.imgProfileUrl} alt = 'profile image'/> : <div  className="w-8 h-8 border-4 border-gray-200 border-dashed rounded-full animate-spin m-auto"></div>}
                                             </div>  
                                     
                                     </>

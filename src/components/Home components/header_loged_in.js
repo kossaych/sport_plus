@@ -6,10 +6,7 @@ import Link from 'next/link';
  
 const Header = () => {
   function logout(){
-    if (typeof window !== 'undefined') {
-     
-    }
-
+    localStorage.setItem('token','')
   }
  
  

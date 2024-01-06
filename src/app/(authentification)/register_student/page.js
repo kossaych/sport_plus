@@ -22,11 +22,11 @@ function Register() {
     "phone" : "",
     "address" : "",
     "sex" : "",
-    "discipline": "" ,
-    'role' :'teacher'
+    "level": "" ,
+    'role' : 'student'
   });
 
-  const [disciplines, setDisciplines] = useState([]);
+  const [levels, setLevels] = useState([]);
   const [addreses, setAddreses] = useState([]); 
 
   const [isWait, setIsWait] = useState(false);
@@ -42,7 +42,7 @@ function Register() {
   }
   
   useEffect(()=>{
-    fetch("https://educa-back.vercel.app/content/api/get_disciplines/", {
+    fetch("http://192.168.1.111:8000/content/api/get_levels/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -59,11 +59,11 @@ function Register() {
       })
       .then((data) => {
         if (data) {
-          setDisciplines(Array(data)[0])
+          setLevels(Array(data)[0])
           
         }
       });
-    fetch("https://educa-back.vercel.app/content/api/get_addreses/", {
+    fetch("http://192.168.1.111:8000/content/api/get_addreses/", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function Register() {
 
   const handleRegistration = () => {
     setIsWait(true);
-    fetch("https://educa-back.vercel.app/content/api/register/", {
+    fetch("http://192.168.1.111:8000/content/api/register/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function Register() {
 
   const handleVerification = () => {
     setIsWait(true);
-    fetch("https://educa-back.vercel.app/content/api/activate/", {
+    fetch("http://192.168.1.111:8000/content/api/activate/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -168,10 +168,10 @@ function Register() {
                                         <input className={inputStyle}  type="number"   placeholder="Phone" onChange = {(e) => setUser({ ...user, ['phone']: e.target.value }) }  /> 
                                         <input className={inputStyle}  type="password"   placeholder="Password" onChange = {(e) => setUser({ ...user, ['password1']: e.target.value }) }  />
 
-                                        <select  className={inputStyle}    id='discipline'    value={user.discipline}     onChange = {(e) => setUser({ ...user, ['discipline']: e.target.value }) }   >
+                                        <select  className={inputStyle}    id='level'    value={user.level}     onChange = {(e) => setUser({ ...user, ['level']: e.target.value }) }   >
                                                 <option>chose division</option>
-                                                {disciplines.map(o => (
-                                                    <option key={o.id} value={o.id}>{o.title}</option>
+                                                {levels.map(o => (
+                                                    <option key={o.id} value={o.id}>{o.level}</option>
                                                 ))}    
                                         </select>
                                         <select   className={inputStyle} id='address'  onChange = {(e) => setUser({ ...user, ['address']: e.target.value }) }    >
