@@ -6,8 +6,11 @@ import Courses from "@/components/Home components/courses";
 
 import { useEffect, useState } from "react";
  export default function Home() {
-    const token = localStorage.getItem('token') 
-    
+  if (typeof window !== 'undefined') {
+    const token  = localStorage.getItem('token')  
+} 
+
+
     if (token != '') {
     const [user,setUser] = useState({})
       
