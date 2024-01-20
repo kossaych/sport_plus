@@ -1,5 +1,7 @@
 'use client'
 import './globals.css'
+import { useEffect, useState } from "react";
+
 //import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Footer from "@/components/Home components/footer";
@@ -21,11 +23,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
- 
+    
 
-  if (typeof window !== 'undefined') {
-    const token  = localStorage.getItem('token')  
-  } 
+        useEffect(()=>{ 
+          const token  = localStorage.getItem('token') 
+        },[])
+     
+ 
 
    
 
