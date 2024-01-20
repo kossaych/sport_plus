@@ -8,8 +8,10 @@ import { useEffect, useState } from "react";
  export default function Home() {
   
     const token = localStorage.getItem('token') 
-    
-    if (token != '') {
+
+
+
+
     const [user,setUser] = useState({})
       
     useEffect(()=>{
@@ -33,8 +35,8 @@ import { useEffect, useState } from "react";
             }
         }) 
     },[])
-
-
+    
+    if (token != '') { 
      return ( 
       
       <div classNameName="bg-white"> 
