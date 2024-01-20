@@ -64,8 +64,7 @@ const Chapiter = (props) => {
         setcontentUrl('')
         setcontentPages('')
         setTeacher(teacher)
-        if (content.url && content.url.substring(12,19) != 'youtube'){
-            console.log('test1')
+        if (content.url && content.url.substring(12,19) != 'youtube'){ 
             setIsWaitLoading(true)
             fetch(content.url)
                 .then((response) => response.blob())
@@ -128,12 +127,12 @@ const Chapiter = (props) => {
                             
                             {(contentUrl || contentPages) ? (
                                         <div className="flex items-center">
-                                            <img src= {"http://192.168.1.111:8000/media/" + teacher.imgProfile}  className="rounded-full w-16 h-16 bg-slate-300 "></img > 
+                                            <img src= {"http://192.168.1.111:8000/media/" + teacher.imgProfile}    className="rounded-full w-10 h-10  bg-slate-300 "></img > 
                                             <div className="flex items-center m-2 text-blue-400 "> {teacher.firstName + " " + teacher.lastName} </div>
                                         </div>  
                                     ) : <div className="flex items-center">
                                             <div className='bg-black p-2 z-40 rounded-full h-12 w-12 object-cover object-center opacity-20 flex items-center'>
-                                                <div  className=" w-full h-full border-4 border-gray-200 border-dashed rounded-full animate-spin z-40"></div>
+                                                
                                             </div>
                                 
                                         </div>        
@@ -173,7 +172,7 @@ const Chapiter = (props) => {
                                 <ul className="w-5/6 m-auto px-2">
                                     {chapiter.courses.map(course => (
                                         <>
-                                        <h1>{course.title}</h1>
+                                        <span className=' font-extrabold text-gray-600 w-full text-left'>{course.title}</span> 
                                         {course.videos_cour.map(video => (
                                             <li key={video.id} className="my-2 pb-2 flex justify-between border-b border-emerald-900" onClick={() => changeContent(video,course.teacher)}>
                                                 <span className=" overflow-hidden w-4/5">{video.title}</span>
@@ -191,7 +190,7 @@ const Chapiter = (props) => {
                                 <ul className="w-5/6 m-auto px-2"> 
                                             {chapiter.courses.map(course => (
                                                 <>
-                                                <h1>{course.title}</h1>
+                                                
                                                 {course.videos_exercice.map(video => ( 
                                                     <li key={video.id} className="my-2  pb-2 flex justify-between border-b border-emerald-900"  onClick={() => changeContent(video,course.teacher)}> 
                                                         <p className="pl-5 max-w-md">{video.title}</p>
@@ -210,7 +209,7 @@ const Chapiter = (props) => {
                                 <ul className="w-5/6 m-auto px-2"> 
                                             {chapiter.courses.map(course => (
                                                 <>
-                                                <h1>{course.title}</h1>
+                                                
                                                 {course.series.map(serie => ( 
                                                     <>
                                                         <li className="my-2  pb-2 flex justify-between border-b border-emerald-900"  onClick={() => changeContent(serie,course.teacher)}> 

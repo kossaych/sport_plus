@@ -55,9 +55,12 @@ function Register() {
         reader.readAsDataURL(selectedImage);
       }
     };
+   
+   
+   
     const handleCoverImageChange = (e) => {
       const selectedImage = e.target.files[0];
-      setImageCover(selectedImage)
+      setImageCover(selectedImage) 
       if (selectedImage) {
         const reader = new FileReader();
         reader.onload = () => {
@@ -236,8 +239,7 @@ function Register() {
 
                                 <div> 
                                   {imgCover ? (
-                                      <>
-                                            
+                                      <> 
                                             <div className="rounded-t-lg h-32 flex justify-end">  
                                   
                                   
@@ -248,11 +250,8 @@ function Register() {
                                                         <CiEdit size={24} /> 
                                                         <input type="file" id="fileInput"  accept="image/*" className="hidden"  onChange={handleCoverImageChange} />
                                                 </label>  
-
-
-                                            </div> 
-
-
+ 
+                                            </div>  
                                       </>
                                    
                                   ) : (
@@ -275,40 +274,7 @@ function Register() {
                                   )}
                                 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
-                              
                 
                                 <label className="absolute bg-gray-600 text-white rounded-full p-1 m-7 z-10" > 
                                             <CiEdit size={24} /> 
@@ -357,7 +323,7 @@ function Register() {
                                                 {user.role == 'teacher' ? <select  className={inputStyle}  value={descepline}   id='discipline'  onChange = {(e) => setDescepline( e.target.value ) }   >
                                                 <option className="hidden">{user.descepline.title}</option> 
                                                 {disciplines.map(o => (
-                                                      <option key={o.id} value={o.id}>{o.discipline}</option>
+                                                      <option key={o.id} value={o.id}>{o.title}</option>
                                                   ))}    
                                                  </select> : <select  className={inputStyle} value={level} id='level' onChange = {(e) => {setLevel( e.target.value )}}  >
                                                    <option className="hidden">{user.level.title}</option>

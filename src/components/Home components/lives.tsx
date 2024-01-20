@@ -31,6 +31,9 @@ function Lives () {
     },
     // Ajoutez davantage de cours ici si nécessaire
   ];
+
+
+  
   const [showMore, setShowMore] = useState(false);
   const toggleShowMore = () => {
     setShowMore(!showMore);

@@ -3,21 +3,24 @@ import { CiBank, CiBitcoin, CiCoinInsert, CiCoins1, CiGlobe, CiHome,  CiMoneyBil
 import {CiLogout} from 'react-icons/ci'
 import {VscAccount} from 'react-icons/vsc'
 import Link from 'next/link';
- 
+import logo from './Logo.jpg'
+import { redirect } from 'next/dist/server/api-utils';
 const Header = () => {
   function logout(){
     localStorage.setItem('token','')
-  }
+    window.location = '/'
+    
+   }
  
  
   return (
           <div className="bg-white">
             <nav className="mx-auto flex max-w-7xl items-center justify-between h-14  py-10 px-5 lg:px-8"> 
               <div className="">
-                <Link href="/" >
+                <Link href="/" className='flex justify-center flex-wrap items-center'>
                   
-                  <img className="" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt=""></img>
-                  <span className="">Educa</span>
+                  <img  src={logo.src} width='120px' className = 'rounded-full' alt="logo" />
+                  <span className="text-end">Educa</span>
                 </Link>
                 
                   

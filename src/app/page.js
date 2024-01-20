@@ -2,7 +2,7 @@
 import Lives from "@/components/Home components/lives";
 import Offer from "@/components/Home components/offer";
 import Subjects from "@/components/Home components/subjects";
-import Levels from "@/components/Home components/levels";
+import Courses from "@/components/Home components/courses";
 
 import { useEffect, useState } from "react";
  export default function Home() {
@@ -36,19 +36,22 @@ import { useEffect, useState } from "react";
 
      return ( 
       
-      <div className="bg-blue-50"> 
+      <div classNameName="bg-white"> 
     
         <Lives ></Lives>
         {user.role == 'student'  ?  <Subjects></Subjects>  : "" }
-        {user.role == 'teacher'  ?  <Levels></Levels> : "" }
+        {user.role == 'teacher'  ?  <Courses></Courses> : "" }
  
       </div>
     
    
     )}else{
-      return ('you are loged out')
+      return ( 
+      <>
+        you are not loged in
+      </>
+      )
     }
  
-  
-   
+
 }

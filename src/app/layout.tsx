@@ -22,14 +22,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
  
+
+
+  
      const token  = localStorage.getItem('token') 
  
-console.log(token)
+ 
+
+
+
 
    return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 ">
           {token  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
              {children}
           <Footer></Footer>
