@@ -25,10 +25,9 @@ export default function RootLayout({
 }) {
     
 
-        useEffect(()=>{ 
+       
           const token  = localStorage.getItem('token') 
-        },[])
-     
+ 
  
 
    
