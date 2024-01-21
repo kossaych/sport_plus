@@ -22,8 +22,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
-    
+}) { 
 
   if (typeof window !== "undefined") { 
       return (
