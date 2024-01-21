@@ -16,15 +16,18 @@ const Subject = () => {
   } 
   
   const [isWaitLoading, setIsWaitLoading] = useState(true);
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    const token = localStorage.getItem('token')
+  }
 
-
-  useEffect(()=>{
+     useEffect(()=>{
 
     fetch("http://192.168.1.111:8000/content/api/get_subjects/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+        'Authorization': 'token ' + token,
 
       },
      
