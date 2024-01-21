@@ -26,7 +26,7 @@ export default function RootLayout({
     
 
        
-          const token  =  'localStorage.getItem('token')' 
+          const token  =  'localStorageget' 
  
  
 

@@ -7,7 +7,7 @@ import Courses from "@/components/Home components/courses";
 import { useEffect, useState } from "react";
  export default function Home() {
   
-    const token =  'localStorage.getItem('token')' 
+    const token =  'localStorageget' 
 
 
 
@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
       fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "get",
         headers: {
-          'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
+          'Authorization': 'token ' + JSON.parse( 'localStorageget'),
           "Content-Type": "application/json",
         },
        
