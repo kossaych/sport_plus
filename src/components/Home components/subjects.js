@@ -5,9 +5,7 @@ import React, { useEffect, useState } from 'react';
 const Subject = () => { 
       const [subjects,setSubjects] =  useState([])
 
-      if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('token');
-      }
+      const token = ''
        
 
       const [isPopUpOpen, setPopUpOpen] = useState(false);
@@ -20,7 +18,32 @@ const Subject = () => {
       } 
       
       const [isWaitLoading, setIsWaitLoading] = useState(true); 
-      
+      useEffect(()=>{
+
+        fetch("http://192.168.1.111:8000/content/api/get_subjects/", {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'token ' + token,
+
+          },
+        
+        })
+          .then((response) => {
+            if (response.status === 200) {
+              setIsWaitLoading(false)
+              return response.json();
+            } else {
+              setPopUpOpen(true)
+              setMessage('server error try again !');
+            }
+          })
+          .then((data) => {
+            if (data) {
+              setSubjects(Array(data)[0]) 
+            }
+          })
+      },[]) 
       return (
           <>      
           
