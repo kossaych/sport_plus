@@ -1,10 +1,14 @@
-'use client';
-import { counter } from '@fortawesome/fontawesome-svg-core';
+'use client'; 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
 const Subject = () => { 
       const [subjects,setSubjects] =  useState([])
+
+      if (typeof localStorage !== 'undefined') {
+        const token = localStorage.getItem('token');
+      }
+       
 
       const [isPopUpOpen, setPopUpOpen] = useState(false);
       const [message, setMessage] = useState("");
@@ -22,7 +26,7 @@ const Subject = () => {
           method: "get",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+            'Authorization': 'token ' + token,
 
           },
         
@@ -41,7 +45,7 @@ const Subject = () => {
               setSubjects(Array(data)[0]) 
             }
           })
-          },[]) 
+      },[]) 
       return (
           <>      
           
