@@ -25,10 +25,9 @@ export default function RootLayout({
 }) {
     
 
-       
-          const token  = localStorage.getItem('token') 
- 
- 
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem('token') 
+  }
 
    
 
