@@ -26,22 +26,13 @@ export default function RootLayout({
   
     
 
-    const [token,setToken] = useState('')
-
-     if (typeof localStorage !== 'undefined') { 
-
-          if ( localStorage.getItem('token') != null ){
-                setToken(localStorage.getItem('token'))
-          } 
-      
-    }  
-
+ 
   
    return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100 ">
-          {token != ''   ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+              <HeaderLogedIn></HeaderLogedIn>   <HeaderLogedOut></HeaderLogedOut>
              {children}
           <Footer></Footer>
         </div>
