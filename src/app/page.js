@@ -9,13 +9,7 @@ import { useEffect, useState } from "react";
   
     const token = localStorage.getItem('token') 
 
-
-
-
-    
-    
-    if (token != '') { 
-      const [user,setUser] = useState({})
+    const [user,setUser] = useState({})
       
     useEffect(()=>{
   
@@ -38,6 +32,12 @@ import { useEffect, useState } from "react";
             }
         }) 
     },[])
+
+
+    
+    
+    if (token != '') { 
+      
 
 
 
