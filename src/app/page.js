@@ -7,13 +7,7 @@ import Courses from "@/components/Home components/courses";
 import { useEffect, useState } from "react";
  export default function Home() {
     
-
-    var token = ''
   
-    if (typeof window !== "undefined") {
-       token = localStorage.getItem('token') 
-    }
-
     const [user,setUser] = useState({})
       
     useEffect(()=>{
@@ -39,33 +33,28 @@ import { useEffect, useState } from "react";
     },[])
 
 
+    if (typeof window !== "undefined") {
     
-    
-    if (token != '') { 
+          if (localStorage.getItem('token') ) {  
+          return ( 
+            
+            <div classNameName="bg-white"> 
+          
+              <Lives ></Lives>
+              {user.role == 'student'  ?  <Subjects></Subjects>  : "" }
+              {user.role == 'teacher'  ?  <Courses></Courses> : "" }
       
-
-
-
-
-
-     return ( 
-      
-      <div classNameName="bg-white"> 
-    
-        <Lives ></Lives>
-        {user.role == 'student'  ?  <Subjects></Subjects>  : "" }
-        {user.role == 'teacher'  ?  <Courses></Courses> : "" }
- 
-      </div>
-    
-   
-    )}else{
-      return ( 
-      <>
-        you are not loged in
-      </>
-      )
-    }
+            </div>
+          
+        
+          )}else{
+            return ( 
+            <>
+              you are not loged in
+            </>
+            )
+          }
+  }
  
 
 }
