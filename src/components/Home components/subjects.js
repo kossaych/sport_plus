@@ -3,8 +3,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-const Subject = () => {
-  if (typeof(window) != 'undefined') {
+const Subject = () => { 
       const [subjects,setSubjects] =  useState([])
 
       const [isPopUpOpen, setPopUpOpen] = useState(false);
@@ -103,7 +102,7 @@ const Subject = () => {
           
       
     
-      );}
+      );
 };
 
 export default Subject;

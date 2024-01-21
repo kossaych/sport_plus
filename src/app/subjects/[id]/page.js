@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const Subject = (props) => {  
-  if (typeof(window) != 'undefined') {
+const Subject = (props) => {   
           const [subject,setSubject] =  useState({chapiters : []}) 
 
           const [isPopUpOpen, setPopUpOpen] = useState(false);
@@ -51,7 +50,8 @@ const Subject = (props) => {
                 }
               }) 
           },[])
-        
+
+          
           return (
             <>
             <div className=" transition-d  bg-white   shadow-md rounded-xl   p-1 m-2 max-w-md">
@@ -123,7 +123,7 @@ const Subject = (props) => {
 
             </>
           );
-  }
+  
 };
 
 export default Subject;
