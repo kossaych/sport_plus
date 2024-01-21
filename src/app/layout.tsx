@@ -29,7 +29,7 @@ export default function RootLayout({
     const [token,setToken] = useState('')
 
      if (typeof localStorage !== 'undefined') {
-      if (localStorage.getItem('token') !== null ){
+      if (localStorage.getItem('token')){
         setToken(localStorage.getItem('token'))
       } 
       
