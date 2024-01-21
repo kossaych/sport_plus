@@ -25,24 +25,19 @@ export default function RootLayout({
 }) {
     
 
-  if (typeof window !== "undefined") {
-     
-  
-
-   
-
-   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="bg-gray-100 ">
-          {localStorage.getItem('token')  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
-             {children}
-          <Footer></Footer>
-        </div>
-        
-      </body>
-    </html>
-  )
+  if (typeof window !== "undefined") { 
+      return (
+        <html lang="en">
+          <body className={inter.className}>
+            <div className="bg-gray-100 ">
+              {localStorage.getItem('token')  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+                {children}
+              <Footer></Footer>
+            </div>
+            
+          </body>
+        </html>
+      )
 }}
 
 
