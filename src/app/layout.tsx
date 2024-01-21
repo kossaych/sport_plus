@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   
-     
+    
 
     const [token,setToken] = useState('')
 
@@ -32,7 +32,7 @@ export default function RootLayout({
       setToken(localStorage.getItem('token'))
     }  
 
- 
+    if (typeof localStorage !== 'undefined') {
    return (
     <html lang="en">
       <body className={inter.className}>
@@ -44,7 +44,7 @@ export default function RootLayout({
         
       </body>
     </html>
-  )
+  )}
 }
 
 
