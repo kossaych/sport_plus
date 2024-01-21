@@ -30,11 +30,11 @@ export default function RootLayout({
 
      if (typeof localStorage !== 'undefined') {
       const token  =  localStorage.getItem('token')  
-    }  
+    } else{
+      const token = ''
+    }
 
-
-
-
+ 
    return (
     <html lang="en">
       <body className={inter.className}>
