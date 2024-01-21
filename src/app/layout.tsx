@@ -26,13 +26,11 @@ export default function RootLayout({
   
      
 
-
+    const [token,setToken] = useState('')
 
      if (typeof localStorage !== 'undefined') {
-      const token  =  localStorage.getItem('token')  
-    } else{
-      const token = ''
-    }
+      setToken(localStorage.getItem('token'))
+    }  
 
  
    return (
