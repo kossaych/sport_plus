@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
   
   if (typeof localStorage !== 'undefined') {
     const token  =  localStorage.getItem('token')  
-  }  
+  }  else{
+    const token = ''
+  }
 
     
 
