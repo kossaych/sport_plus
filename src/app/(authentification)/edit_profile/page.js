@@ -87,7 +87,7 @@ function Register() {
       fetch("http://192.168.1.111:8000/content/api/profile/", {
             method: "get",
             headers: {
-                'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+                'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
                 "Content-Type": "application/json",
             },
         
@@ -198,7 +198,7 @@ function Register() {
       fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "post",
         headers: {
-           'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+           'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
 
         },
         body: (editedUser),

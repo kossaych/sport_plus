@@ -22,7 +22,7 @@ const Subject = (props) => {
             fetch("http://192.168.1.111:8000/content/api/subject/" +(props.params.id), {
               method: "get",
               headers: {
-                'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+                'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
                 "Content-Type": "application/json",
               },
             
@@ -51,7 +51,7 @@ const Subject = (props) => {
               }) 
           },[])
 
-          
+
           return (
             <>
             <div className=" transition-d  bg-white   shadow-md rounded-xl   p-1 m-2 max-w-md">

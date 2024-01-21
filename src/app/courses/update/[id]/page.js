@@ -77,7 +77,7 @@ function UpdateCourse(props) {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+        'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
 
       },
      
@@ -104,7 +104,7 @@ function UpdateCourse(props) {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+        'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
 
       },
       
@@ -132,7 +132,7 @@ function UpdateCourse(props) {
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+        'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
 
       },
       body: JSON.stringify(course),
@@ -321,7 +321,7 @@ function UpdateCourse(props) {
       fetch("http://192.168.1.111:8000/content/api/video/" , {
         method: "post",
         headers: { 
-          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+          'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
   
         },
         body: videoData,

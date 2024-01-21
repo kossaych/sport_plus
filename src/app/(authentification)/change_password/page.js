@@ -6,7 +6,7 @@ import PopUp from '/src/components/general/pop-up.js'
 
 function ChangePassword() { 
   if (typeof window !== 'undefined') {
-    if(!(localStorage.getItem('token'))){
+    if(!( 'localStorage.getItem('token')')){
       window.location.href = "/";
     }
   }
@@ -36,7 +36,7 @@ function ChangePassword() {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
+        'Authorization': 'token ' + JSON.parse( 'localStorage.getItem('token')'),
       },
       body: JSON.stringify({
         password: newPassword1,
