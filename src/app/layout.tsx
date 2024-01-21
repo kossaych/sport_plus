@@ -32,19 +32,19 @@ export default function RootLayout({
       setToken(localStorage.getItem('token'))
     }  
 
-    if (typeof localStorage !== 'undefined') {
+   
    return (
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100 ">
-          {token != ''   ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+            <HeaderLogedIn></HeaderLogedIn>   <HeaderLogedOut></HeaderLogedOut>
              {children}
           <Footer></Footer>
         </div>
         
       </body>
     </html>
-  )}
+  )
 }
 
 
