@@ -7,25 +7,22 @@ import Courses from "@/components/Home components/courses";
 import { useEffect, useState } from "react";
  export default function Home() {
   
-  if (typeof localStorage !== 'undefined') {
-    const token  =  localStorage.getItem('token')  
-  }  else{
-    const token = ''
-  }
+    const token = localStorage.getItem('token') 
+
+
+
 
     
-
-
-
-
-    const [user,setUser] = useState({})
+    
+    if (token != '') { 
+      const [user,setUser] = useState({})
       
     useEffect(()=>{
   
       fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "get",
         headers: {
-          'Authorization': 'token ' + JSON.parse( localStorage.getItem('token')),
+          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
           "Content-Type": "application/json",
         },
        
@@ -41,7 +38,11 @@ import { useEffect, useState } from "react";
             }
         }) 
     },[])
-     
+
+
+
+
+
      return ( 
       
       <div classNameName="bg-white"> 
@@ -53,7 +54,13 @@ import { useEffect, useState } from "react";
       </div>
     
    
-    ) 
+    )}else{
+      return ( 
+      <>
+        you are not loged in
+      </>
+      )
+    }
  
 
 }

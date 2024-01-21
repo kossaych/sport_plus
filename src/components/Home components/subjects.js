@@ -24,7 +24,7 @@ const Subject = () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse( localStorage.getItem('token')),
+        'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
 
       },
      
