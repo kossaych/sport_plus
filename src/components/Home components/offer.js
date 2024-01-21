@@ -5,8 +5,7 @@ import {CiBoxes} from 'react-icons/ci';
 
  
 const Offer = ({ username, offer, expirationDate, progress }) => {
-      const offerRef= useRef()
-      
+      const offerRef= useRef() 
       return (
         <div ref = {offerRef} className=" p-4 shadow-md rounded-lg border border-blue-900 m-2  bg-gradient-to-r from-sky-300 to-blue-400" >
           {offer != 'no offer' ?  
