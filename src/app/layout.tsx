@@ -26,8 +26,8 @@ export default function RootLayout({
     
 
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem('token') 
-  }
+     
+  
 
    
 
@@ -35,7 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="bg-gray-100 ">
-          {token  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+          {localStorage.getItem('token')  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
              {children}
           <Footer></Footer>
         </div>
@@ -43,7 +43,7 @@ export default function RootLayout({
       </body>
     </html>
   )
-}
+}}
 
 
 
