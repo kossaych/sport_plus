@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 const Subject = () => { 
       const [subjects,setSubjects] =  useState([])
 
-      if (typeof localStorage !== 'undefined') {
+      if (typeof window !== 'undefined') {
         const token = localStorage.getItem('token');
       }
        
