@@ -41,8 +41,7 @@ import { useEffect, useState } from "react";
             }
         }) 
     },[])
-    
-    if (token != '') { 
+     
      return ( 
       
       <div classNameName="bg-white"> 
@@ -54,13 +53,7 @@ import { useEffect, useState } from "react";
       </div>
     
    
-    )}else{
-      return ( 
-      <>
-        you are not loged in
-      </>
-      )
-    }
+    ) 
  
 
 }
