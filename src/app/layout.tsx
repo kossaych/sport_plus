@@ -23,7 +23,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-     const token  =  localStorage.getItem('token')  
+  
+     
+
+
+
+     if (typeof localStorage !== 'undefined') {
+      const token  =  localStorage.getItem('token')  
+    }  
+
+
+
+
    return (
     <html lang="en">
       <body className={inter.className}>
