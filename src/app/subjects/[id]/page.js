@@ -22,7 +22,7 @@ const Subject = (props) => {
             fetch("http://192.168.1.111:8000/content/api/subject/" +(props.params.id), {
               method: "get",
               headers: {
-                'Authorization': 'token ' + JSON.parse( 'localStorageget'),
+                'Authorization': 'token ' + JSON.parse( localStorage.getItem('token')),
                 "Content-Type": "application/json",
               },
             

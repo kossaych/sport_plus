@@ -25,7 +25,7 @@ const Courses = () => {
       method: "get",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': 'token ' + JSON.parse( 'localStorageget'),
+        'Authorization': 'token ' + JSON.parse( localStorage.getItem('token')),
 
       },
      
