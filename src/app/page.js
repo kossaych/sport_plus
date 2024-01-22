@@ -5,12 +5,8 @@ import Subjects from "@/components/Home components/subjects";
 import Courses from "@/components/Home components/courses";
 
 import { useEffect, useState } from "react";
- export default function Home() {
-    
+ export default function Home() { 
   
-   
-
-
     if (typeof window !== "undefined") {
     
           if (localStorage.getItem('token') ) {  

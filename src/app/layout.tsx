@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) { 
 
-  
+  if (typeof window !== "undefined") { 
       return (
         <html lang="en">
           <body className={inter.className}>
@@ -37,7 +37,7 @@ export default function RootLayout({
           </body>
         </html>
       )
-}
+}}
 
 
 
