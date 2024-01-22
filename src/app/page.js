@@ -33,6 +33,21 @@ import { useEffect, useState } from "react";
     },[])
 
 
+
+    return ( 
+            
+      <div classNameName="bg-white"> 
+    
+        <Lives ></Lives>
+        {user.role == 'student'  ?  <Subjects></Subjects>  : "" }
+        {user.role == 'teacher'  ?  <Courses></Courses> : "" }
+
+      </div>
+    
+  
+    )
+
+
     if (typeof window !== "undefined") {
     
           if (localStorage.getItem('token') ) {  
