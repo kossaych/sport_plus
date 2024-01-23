@@ -20,7 +20,7 @@ const Subject = () => {
 
   useEffect(()=>{
 
-    fetch("http://192.168.1.111:8000/content/api/get_subjects/", {
+    fetch("https://educa-back.vercel.app/content/api/get_subjects/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const Subject = () => {
               <div className="flex items-center">
                 <div className="mr-4">
                   <img
-                    src={"http://192.168.1.111:8000/media/" + subject.image}
+                    src={"https://educa-back.vercel.app/media/" + subject.image}
                     alt={subject.title}
                     className=" h-10 w-10 m-2"
                   />

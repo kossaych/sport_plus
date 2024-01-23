@@ -73,7 +73,7 @@ function UpdateCourse(props) {
   
   // fetch chapiters
   useEffect(()=>{
-    fetch("http://192.168.1.111:8000/content/api/get_teacher_desipline_chapiters/", {
+    fetch("https://educa-back.vercel.app/content/api/get_teacher_desipline_chapiters/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ function UpdateCourse(props) {
 
   // fetch course informations
   useEffect(()=>{
-    fetch("http://192.168.1.111:8000/content/api/course_pk/" + +(props.params.id), {
+    fetch("https://educa-back.vercel.app/content/api/course_pk/" + +(props.params.id), {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -128,7 +128,7 @@ function UpdateCourse(props) {
 
    const handleUpdateCourse = () => {
 
-    fetch("http://192.168.1.111:8000/content/api/course_pk/" + +(props.params.id), {
+    fetch("https://educa-back.vercel.app/content/api/course_pk/" + +(props.params.id), {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -318,7 +318,7 @@ function UpdateCourse(props) {
       videoData.append('type',video.type)
       videoData.append('course',course.id)  
       videoData.append('status',video.status)  
-      fetch("http://192.168.1.111:8000/content/api/video/" , {
+      fetch("https://educa-back.vercel.app/content/api/video/" , {
         method: "post",
         headers: { 
           'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
