@@ -3,7 +3,7 @@ import HomeLogedIn from "@/components/Home components/home_loged_in";
 export default function Home() { 
   
   if (typeof window !== "undefined") { 
-        if (true ) {  
+        if (localStorage.getItem('token') ) {  
             return ( 
                   <HomeLogedIn></HomeLogedIn> 
               )
