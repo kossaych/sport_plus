@@ -10,7 +10,7 @@ function HomeLogedIn() {
 
     useEffect(()=>{
   
-      fetch("https://educa-back.vercel.app/content/api/profile/", {
+      fetch("http://192.168.1.111:8000/content/api/profile/", {
         method: "get",
         headers: {
           'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),

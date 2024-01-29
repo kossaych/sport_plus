@@ -24,12 +24,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) { 
 
-  if (typeof window !==  "undefined") { 
+ // if (typeof window !==  "undefined") { 
       return (
         <html lang="en">
           <body className={inter.className}>
             <div className="bg-gray-100 ">
-              {localStorage.getItem('token')  != '' ?   <HeaderLogedIn></HeaderLogedIn> :  <HeaderLogedOut></HeaderLogedOut>}
+              <HeaderLogedIn></HeaderLogedIn>  
                 {children}
               <Footer></Footer>
             </div>
@@ -37,7 +37,7 @@ export default function RootLayout({
           </body>
         </html>
       )
-}}
+}//}
 
 
 

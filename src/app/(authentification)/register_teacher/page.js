@@ -42,7 +42,7 @@ function Register() {
   }
   
   useEffect(()=>{
-    fetch("https://educa-back.vercel.app/content/api/get_disciplines/", {
+    fetch("http://192.168.1.111:8000/content/api/get_disciplines/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function Register() {
           
         }
       });
-    fetch("https://educa-back.vercel.app/content/api/get_addreses/", {
+    fetch("http://192.168.1.111:8000/content/api/get_addreses/", {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function Register() {
 
   const handleRegistration = () => {
     setIsWait(true);
-    fetch("https://educa-back.vercel.app/content/api/register/", {
+    fetch("http://192.168.1.111:8000/content/api/register/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function Register() {
 
   const handleVerification = () => {
     setIsWait(true);
-    fetch("https://educa-back.vercel.app/content/api/activate/", {
+    fetch("http://192.168.1.111:8000/content/api/activate/", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

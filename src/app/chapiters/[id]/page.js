@@ -35,7 +35,7 @@ const Chapiter = (props) => {
  
     useEffect(()=>{
   
-      fetch("https://educa-back.vercel.app/content/api/chapiter/" +(props.params.id), {
+      fetch("http://192.168.1.111:8000/content/api/chapiter/" +(props.params.id), {
         method: "get",
         headers: {
           'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -110,7 +110,7 @@ const Chapiter = (props) => {
                             }   
                             { contentPages && (<div className=' overflow-scroll h-96' width="100%"  >  
                                                     {contentPages.map(page => (
-                                                        <img src={'https://educa-back.vercel.app/media/' + page.content} key={page.id} alt="PDF Content" /> 
+                                                        <img src={'http://192.168.1.111:8000/media/' + page.content} key={page.id} alt="PDF Content" /> 
                                                         
                                                     ))} 
                                             </div>) }
@@ -127,7 +127,7 @@ const Chapiter = (props) => {
                             
                             {(contentUrl || contentPages) ? (
                                         <div className="flex items-center">
-                                            <img src= {"https://educa-back.vercel.app/media/" + teacher.imgProfile}    className="rounded-full w-10 h-10  bg-slate-300 "></img > 
+                                            <img src= {"http://192.168.1.111:8000/media/" + teacher.imgProfile}    className="rounded-full w-10 h-10  bg-slate-300 "></img > 
                                             <div className="flex items-center m-2 text-blue-400 "> {teacher.firstName + " " + teacher.lastName} </div>
                                         </div>  
                                     ) : <div className="flex items-center">
@@ -141,7 +141,7 @@ const Chapiter = (props) => {
                             {(contentUrl || contentPages) ? (<div className="flex items-center justify-between m-2">
                                 <p className=" font-semibold text-emerald-950">attachment :</p>
                                 <p>    
-                                    <a href = {"https://educa-back.vercel.app/media/"+content.attachment} class="button flex bg-red-300 rounded-lg p-1  items-center m-2">  
+                                    <a href = {"http://192.168.1.111:8000/media/"+content.attachment} class="button flex bg-red-300 rounded-lg p-1  items-center m-2">  
                                         <VscArrowCircleDown size={25} className='text-emerald-900 m-1'></VscArrowCircleDown>
                                         <VscFilePdf size={25} className='text-red-800 m-1'></VscFilePdf>
                                         

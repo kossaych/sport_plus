@@ -42,7 +42,7 @@ function Register() {
 
     const handleCreateCourse = () => { 
     setIsWaiting(true);
-    fetch("https://educa-back.vercel.app/content/api/course/", {
+    fetch("http://192.168.1.111:8000/content/api/course/", {
       method: "post",
       headers: {
          'Authorization': 'token ' + JSON.parse(localStorage.getItem('token')),
@@ -72,7 +72,7 @@ function Register() {
   
    // fetch chapiters
    useEffect(()=>{
-    fetch("https://educa-back.vercel.app/content/api/get_teacher_desipline_chapiters/", {
+    fetch("http://192.168.1.111:8000/content/api/get_teacher_desipline_chapiters/", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
